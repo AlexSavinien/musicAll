@@ -36,6 +36,29 @@ class EventRepository extends ServiceEntityRepository
     }
     */
 
+    /**
+     * @param $research
+     * @return mixed
+     *
+     * Sert à rechercher des événements par artiste, ou nom, ou lieu, ou style
+     */
+    public function findEvent($research)
+    {
+        $qb = $this->createQueryBuilder('e');
+        $cnx = $this->getEntityManager()->getConnection();
+
+        return $qb
+            ->orWhere('e.artist like ' . $cnx->quote('%'.$research.'%'))
+            ->orWhere('e.name like %' . $cnx->quote('%'.$research.'%'))
+            ->orWhere('e.place like %' . $cnx->quote('%'.$research.'%'))
+            ->orWhere('e.style like %' . $cnx->quote('%'.$research.'%'))
+            ->setMaxResults(50)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+
     /*
     public function findOneBySomeField($value): ?Event
     {
