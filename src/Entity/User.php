@@ -69,6 +69,11 @@ class User
     private $styles;
 
     /**
+     * @ORM\Column(type="string", length=20)
+     */
+    private $role = 'ROLE_USER';
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Place", mappedBy="owner")
      */
     private $places;
@@ -214,6 +219,25 @@ class User
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    /**
+     * @param mixed $role
+     * @return User
+     */
+    public function setRole($role)
+    {
+        $this->role = $role;
+        return $this;
+    }
+
 
     /**
      * @return Collection|Place[]
