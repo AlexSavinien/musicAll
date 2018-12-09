@@ -40,6 +40,27 @@ class Place
     private $owner;
 
     /**
+     * @ORM\Column(type="string", length==255)
+     */
+    private $address;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $zipCode;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $lon;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $lat;
+
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Event", mappedBy="place")
      */
     private $events;
@@ -99,6 +120,78 @@ class Place
     {
         $this->owner = $owner;
 
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    /**
+     * @param mixed $address
+     * @return Place
+     */
+    public function setAddress($address): self
+    {
+        $this->address = $address;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getZipCode(): ?int
+    {
+        return $this->zipCode;
+    }
+
+    /**
+     * @param mixed $zipCode
+     * @return Place
+     */
+    public function setZipCode($zipCode): self
+    {
+        $this->zipCode = $zipCode;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLon(): ?float
+    {
+        return $this->lon;
+    }
+
+    /**
+     * @param mixed $lon
+     * @return Place
+     */
+    public function setLon($lon): self
+    {
+        $this->lon = $lon;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLat(): ?float
+    {
+        return $this->lat;
+    }
+
+    /**
+     * @param mixed $lat
+     * @return Place
+     */
+    public function setLat($lat): self
+    {
+        $this->lat = $lat;
         return $this;
     }
 

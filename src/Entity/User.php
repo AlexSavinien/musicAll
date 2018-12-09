@@ -5,11 +5,19 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @UniqueEntity(fields={"email"},
+ *     message="Il existe déjà un utilisateur avec cette email")
+ * @UniqueEntity(fields={"pseudo"},
+ *     message="Ce pseudo est déjà utilisé")
+ *
  */
-class User
+class User implements UserInterface, \Serializable
 {
     /**
      * @ORM\Id()
@@ -20,31 +28,43 @@ class User
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank(message="Le prénom est obligatoire")
+     * @Assert\Length(max="100", maxMessage="Le prénom ne doit pas faire plus de {{ limit }} caractères")
      */
     private $firstname;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length = 100)
+     * @Assert\NotBlank(message="Le nom est obligatoire")
+     * @Assert\Length(max="100", maxMessage="Le nom ne doit pas faire plus de {{ limit }} caractères")
+     *
      */
     private $lastname;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type = "datetime")
+     * // TODO quelle contrainte doit on rajouter
      */
     private $birthdate;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=100, unique = true)
+     * @Assert\NotBlank(message="Le pseudo est obligatoire")
+     * @Assert\Length(max="100", maxMessage="Le pseudo ne doit pas faire plus de {{ limit }} caractères")
+     *
      */
     private $pseudo;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="L'adresse est obligatoire")
+     *
      */
     private $adress;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="Le code postal est obligatoire")
      */
     private $zipCode;
 
@@ -54,7 +74,10 @@ class User
     private $phone;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique = true)
+     * @Assert\NotBlank(message="L'email est obligatoire")
+     * @Assert\Email(message="L'email n'est pas valide")
+     *
      */
     private $email;
 
@@ -67,6 +90,11 @@ class User
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $styles;
+
+    /**
+     * @ORM\Column(type="string", length=20)
+     */
+    private $role = 'ROLE_USER';
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Place", mappedBy="owner")
@@ -82,6 +110,18 @@ class User
      * @ORM\ManyToMany(targetEntity="App\Entity\Comment", mappedBy="notation")
      */
     private $likedComments;
+
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $password;
+
+    /**
+     * @var string
+     * @Assert\NotBlank(message="Le mot de passe est obligatoire")
+     */
+    private $plainPassword;
 
     public function __construct()
     {
@@ -216,6 +256,25 @@ class User
     }
 
     /**
+     * @return mixed
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    /**
+     * @param mixed $role
+     * @return User
+     */
+    public function setRole($role)
+    {
+        $this->role = $role;
+        return $this;
+    }
+
+
+    /**
      * @return Collection|Place[]
      */
     public function getPlaces(): Collection
@@ -303,5 +362,150 @@ class User
         }
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * @param mixed $password
+     * @return User
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param string $plainPassword
+     * @return User
+     */
+    public function setPlainPassword(string $plainPassword): User
+    {
+        $this->plainPassword = $plainPassword;
+        return $this;
+    }
+
+
+    /**
+     * Returns the roles granted to the user.
+     *
+     *     public function getRoles()
+     *     {
+     *         return array('ROLE_USER');
+     *     }
+     *
+     * Alternatively, the roles might be stored on a ``roles`` property,
+     * and populated in any number of different ways when the user object
+     * is created.
+     *
+     * @return (Role|string)[] The user roles
+     */
+    public function getRoles()
+    {
+        return [
+            $this->role
+        ];
+    }
+
+    /**
+     * Returns the salt that was originally used to encode the password.
+     *
+     * This can return null if the password was not encoded using a salt.
+     *
+     * @return string|null The salt
+     */
+    public function getSalt()
+    {
+        // TODO: Implement getSalt() method.
+    }
+
+    /**
+     * Returns the username used to authenticate the user.
+     *
+     * @return string The username
+     */
+    public function getUsername()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Removes sensitive data from the user.
+     *
+     * This is important if, at any given point, sensitive information like
+     * the plain-text password is stored on this object.
+     */
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
+    }
+
+    /**
+     * String representation of object
+     * @link https://php.net/manual/en/serializable.serialize.php
+     * @return string the string representation of the object or null
+     * @since 5.1.0
+     */
+    public function serialize()
+    {
+
+        return serialize([
+            $this->id,
+            $this->firstname,
+            $this->lastname,
+            $this->birthdate,
+            $this->pseudo,
+            $this->adress,
+            $this->zipCode,
+            $this->phone,
+            $this->email,
+            $this->image,
+            $this->styles,
+            $this->password
+
+        ]);
+
+    }
+
+    /**
+     * Constructs the object
+     * @link https://php.net/manual/en/serializable.unserialize.php
+     * @param string $serialized <p>
+     * The string representation of the object.
+     * </p>
+     * @return void
+     * @since 5.1.0
+     */
+    public function unserialize($serialized)
+    {
+        list(
+            $this->id,
+            $this->firstname,
+            $this->lastname,
+            $this->birthdate,
+            $this->pseudo,
+            $this->adress,
+            $this->zipCode,
+            $this->phone,
+            $this->email,
+            $this->image,
+            $this->styles,
+            $this->password
+            ) = unserialize($serialized);
     }
 }
