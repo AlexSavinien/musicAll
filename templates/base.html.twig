@@ -44,7 +44,6 @@
             <a class="navbar-brand" href="">
                 Home
             </a>
-            {#{{ render(controller('App\\Controller\\CategoryController::menu')) }}#}
             <div class="navbar-brand">
                 <ul class="navbar-nav">
 
@@ -52,19 +51,20 @@
 
                         {# app.user : l'utilisateur connecté #}
                         <li class="nav-item">
-                            <a class="nav-link" href="">
+                            <a class="nav-link" href="{{ path('app_security_register') }}">
                                 Inscription
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="">
+
+                            <a class="nav-link" href="{{ path('app_security_login') }}">
                                 Connexion
                             </a>
                         </li>
                     {% else %}
                         <li class="nav-item">
                             <a class="nav-link" href="">
-                                {{ app.user }} - Profil
+                                {{ app.user.pseudo }} - Profil
                             </a>
                         </li>
                         <li class="nav-item">
