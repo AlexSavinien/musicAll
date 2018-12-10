@@ -34,7 +34,7 @@ class UserType extends AbstractType
             )
 
             ->add(
-                'birthdate', // TODO revoir le format de la date
+                'birthdate', // TODO : revoir le format de la date
                 BirthdayType::class,
                 [
                     'label' => 'Date de naissance'
@@ -102,7 +102,8 @@ class UserType extends AbstractType
                 FileType::class,
                 [
                     'label' => 'Photo',
-                    'required' => false
+                    'required' => false,
+                    //'data_class' => null
                 ]
             )
 

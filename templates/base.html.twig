@@ -41,7 +41,7 @@
 
     <nav class="navbar navbar-expand-md navbar-dark bg-secondary">
         <div class="container navbar-nav">
-            <a class="navbar-brand" href="">
+            <a class="navbar-brand" href="{{ path('app_index_index') }}">
                 Home
             </a>
 
@@ -63,7 +63,7 @@
                         </li>
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="">
+                            <a class="nav-link" href="{{ path('app_security_register', {id: app.user.id} ) }}">
                                 {{ app.user.pseudo }} - Profil
                             </a>
                         </li>
