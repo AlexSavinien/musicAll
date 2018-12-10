@@ -12,45 +12,60 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
+
+    /**
+     * @Route("/index")
+     */
+    public function index()
+    {
+        return $this->render('security/index.html.twig');
+    }
+
+
     /**
      * @Route("/inscription")
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function register(
         Request $request,
         UserPasswordEncoderInterface $passwordEncoder
     )
     {
-        $user = new User();
-        $form = $this->createForm(UserType::class, $user);
 
-        $form->handleRequest($request);
+            $user = new User();
+            $form = $this->createForm(UserType::class, $user);
 
-        if ( $form->isSubmitted() ){
-            if ( $form->isValid() ){
-                $password = $passwordEncoder->encodePassword(
-                    $user,
-                    $user->getPlainPassword()
-                );
+            $form->handleRequest($request);
 
-                $user->setPassword($password);
+            if ( $form->isSubmitted() ){
+                if ( $form->isValid() ){
+                    $password = $passwordEncoder->encodePassword(
+                        $user,
+                        $user->getPlainPassword()
+                    );
 
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($user);
-                $em->flush();
+                    $user->setPassword($password);
 
-                $this->addFlash('success', 'Votre compte est créé');
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($user);
+                    $em->flush();
 
-                // TODO prevoir la redirection vers la home page
+                    $this->addFlash('success', 'Votre compte est créé');
 
+                    $this->redirectToRoute('app_security_login');
+
+                }
             }
-        }
 
-        return $this->render(
-            'security/register.html.twig',
-            [
-            'form' => $form->createView(),
-            ]
-        );
+            return $this->render(
+                'security/register.html.twig',
+                [
+                    'form' => $form->createView(),
+                ]
+            );
+
     }
 
 
@@ -69,6 +84,11 @@ class SecurityController extends AbstractController
 
         if ( !empty($error) ){
             $this->addFlash("error", 'Identifiant incorrecte');
+        }
+
+        if(!is_null($this->getUser()))
+        {
+            $this->redirectToRoute('app_security_index');
         }
 
         return $this->render(
