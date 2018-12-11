@@ -40,7 +40,8 @@ class EventRepository extends ServiceEntityRepository
      * @param $research
      * @return mixed
      *
-     * Sert à rechercher des événements par artiste, ou nom, ou lieu, ou style
+     * Sert à rechercher les 50 événements qui correspondent à la recherche.
+     * La recherche se fait par artiste, ou nom, ou lieu, ou style
      */
     public function findEvent($research)
     {

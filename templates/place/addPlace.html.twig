@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Music's Places{% endblock %}
+
+{% block body %}
+
+{{ form_start(form) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.phone) }}
+    {{ form_row(form.streetNumber) }}
+    {{ form_row(form.streetName) }}
+    {{ form_row(form.zipCode) }}
+    {{ form_row(form.lat) }}
+    {{ form_row(form.lon) }}
+    {% if place.id is null %}
+        {{ form_row(form.owner) }}
+    {% endif %}
+    <div class="text-right">
+        <button type="submit" class="btn btn-primary">
+            Enregistrer
+        </button>
+    </div>
+{{ form_end(form) }}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/addPlace.js') }}"></script>
+{% endblock %}
+
+
