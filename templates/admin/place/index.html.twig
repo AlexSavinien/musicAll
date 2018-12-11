@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>Gestion des lieux</h1>
+    <table class="table table-striped">
+        <tr>
+            <th>Nom du lieu</th>
+            <th>Propiétaire du lieu</th>
+            <th width="250px"></th>
+        </tr>
+        {% for place in places %}
+            <tr>
+                <td>{{ place.name}}</td>
+                <td>{{ place.owner }}</td>
+                <td>
+                    <a href="{{ path('app_admin_place_delete', {id: place.id}) }}"
+                       class="btn btn-danger">
+                        X
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}
