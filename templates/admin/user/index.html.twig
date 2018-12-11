@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>Gestion des utilisateurs</h1>
+    <table class="table table-striped">
+        <tr>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Rôle</th>
+            <th width="250px"></th>
+        </tr>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.lastname }}</td>
+                <td>{{ user.firstname }}</td>
+                <td>{{ user.role }}</td>
+                <td>
+                    <a href="{{ path('app_admin_user_statut', {id: user.id}) }}"
+                       class="btn btn-primary">
+                        Changer le role
+                    </a>
+                    <a href="{{ path('app_admin_user_delete', {id: user.id}) }}"
+                       class="btn btn-danger">
+                        X
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
