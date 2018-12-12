@@ -19,7 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class PlaceController extends AbstractController
 {
     /**
-     * @Route("/{id}", requirements={"id", "\d+"})
+     * @Route("/{id}", requirements={"id": "\d+"})
      */
     public function index(Place $place)
     {
