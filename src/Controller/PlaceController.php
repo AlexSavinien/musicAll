@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Place;
 use App\Form\PlaceType;
-use Doctrine\DBAL\Driver\SQLSrv\LastInsertId;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,6 +18,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class PlaceController extends AbstractController
 {
     /**
+     * @param $id
+     * @return Response
      * @Route("/{id}", requirements={"id": "\d+"})
      */
     public function index(Place $place)
@@ -36,7 +37,7 @@ class PlaceController extends AbstractController
 
     /**
      * @param Request $request
-     * @param Place $place
+     * @param $id
      * @return Response
      * @Route("/ajouter-lieu/{id}", defaults={"id": null}, requirements={"id": "\d+"})
      */
