@@ -20,14 +20,11 @@ class PlaceController extends AbstractController
     /**
      * @param $id
      * @return Response
-     * @Route("/{id}", requirements={"id", "\d+"})
+     * @Route("/{id}", requirements={"id": "\d+"})
      */
-    public function index($id)
+    public function index(Place $place)
     {
-        dump($_SERVER);
-        $repository = $this->getDoctrine()->getManager()->getRepository(Place::class);
-        $place = $repository->find($id);
-        dump($place);
+
         return $this->render(
             'place/index.html.twig',
             [
@@ -70,8 +67,6 @@ class PlaceController extends AbstractController
 
                 $this->addFlash('success', 'Votre lieu a bien été enregistré dans la base de données');
 
-
-//                return $this->redirectToRoute('app_index_index');
                 return $this->redirectToRoute('app_place_index', ['id'=>$place->getId()]);
             }
             else

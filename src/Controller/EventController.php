@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Event;
+use App\Form\EventType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -49,7 +50,7 @@ class EventController extends AbstractController
             $event = $em->getRepository(Event::class)->find($id);
         }
 
-        $form = $this->createForm(Event::class, $event);
+        $form = $this->createForm(EventType::class, $event);
         $form->handleRequest($request);
 
         if ($form->isSubmitted())
@@ -59,7 +60,7 @@ class EventController extends AbstractController
                 $em->persist($event);
                 $em->flush();
                 $this->redirectToRoute('app_index_index');
-                $this->addFlash('success', 'Votre lieu a bien été enregistré dans la base de données');
+                $this->addFlash('success', 'Votre événement a bien été enregistré dans la base de données');
             }
             else
             {
@@ -68,7 +69,7 @@ class EventController extends AbstractController
         }
 
         return $this->render(
-            '',
+            'event/addEvent.html.twig',
             [
                 'form'  => $form->createView()
             ]

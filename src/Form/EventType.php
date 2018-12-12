@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Event;
+use App\Entity\Place;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -50,13 +51,13 @@ class EventType extends AbstractType
                     'label' => "Style(s) de musique"
                 ]
             )
-            ->add('image',
-                FileType::class,
-                [
-                    'label' => "Photo de l'événement",
-                    'required' => false
-                ]
-            )
+//            ->add('image',
+//                FileType::class,
+//                [
+//                    'label' => "Photo de l'événement",
+//                    'required' => false
+//                ]
+//            )
             ->add('urlEvent',
                 UrlType::class,
                 [
@@ -81,6 +82,7 @@ class EventType extends AbstractType
             ->add('place',
                 EntityType::class,
                 [
+                    'class' => Place::class,
                     'label' => "Lieu de l'événement",
                     'choice_label' => 'name'
                 ]
