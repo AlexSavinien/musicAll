@@ -1,20 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello {{ controller_name }}!{% endblock %}
-
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    {# TODO faire l'iframe de la carte avec pictos #}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <div class="container">
+        <div class="row mt-5">
+            <h1>{{ place.name }}</h1>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div>
+                    <p>Adresse : <span style="color: #CD3C30;">{{ place.address }} - {{ place.zipCode }} - ville</span></p>
+                </div>
+                <div>
+                    <p>Téléphone : <span style="color: #CD3C30;">{{ place.phone }}</span></p>
+                </div>
+                <div>
+                    <p>Email de l'établissement : <span style="color: #CD3C30;">{{ place.email }}</span></p>
+                </div>
+                <div>
+                    <p>Description : </p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ac mi urna. Proin ullamcorper arcu tellus, at consequat nisi posuere eu. In volutpat nisi quis metus imperdiet malesuada. Cras ac eros eget eros tempus iaculis. Duis a mattis urna. Maecenas mattis ornare nisl, consequat elementum lectus eleifend ut. Proin sed ante at justo facilisis imperdiet ut mattis urna. Etiam maximus lacus et augue faucibus suscipit. Quisque interdum tincidunt auctor. Curabitur eu nisi vitae arcu vulputate sodales.</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div style="background-color: #d0d0d0; width: 100%; height: 100%;">
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'src/Controller/PlaceController.php'|file_link(0) }}">src/Controller/PlaceController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'templates/place/index.html.twig'|file_link(0) }}">templates/place/index.html.twig</a></code></li>
-    </ul>
-</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 {% endblock %}
