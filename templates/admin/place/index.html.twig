@@ -14,6 +14,10 @@
                 <td>{{ place.name}}</td>
                 <td>{{ place.owner }}</td>
                 <td>
+                    <a href="{{ path('app_place_addplace', {id: place.id}) }}"
+                       class="btn btn-primary">
+                        Modifier le lieu
+                    </a>
                     <a href="{{ path('app_admin_place_delete', {id: place.id}) }}"
                        class="btn btn-danger">
                         X

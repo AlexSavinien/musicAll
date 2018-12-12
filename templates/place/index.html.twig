@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {# TODO faire l'iframe de la carte avec pictos #}
+
+    <div class="container">
+        <div class="row mt-5">
+            <h1>{{ place.name }}</h1>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div>
+                    <p>Adresse : <span style="color: #CD3C30;">{{ place.address }} - {{ place.zipCode }} - ville</span></p>
+                </div>
+                <div>
+                    <p>Téléphone : <span style="color: #CD3C30;">{{ place.phone }}</span></p>
+                </div>
+                <div>
+                    <p>Email de l'établissement : <span style="color: #CD3C30;">{{ place.email }}</span></p>
+                </div>
+                <div>
+                    <p>Description : </p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ac mi urna. Proin ullamcorper arcu tellus, at consequat nisi posuere eu. In volutpat nisi quis metus imperdiet malesuada. Cras ac eros eget eros tempus iaculis. Duis a mattis urna. Maecenas mattis ornare nisl, consequat elementum lectus eleifend ut. Proin sed ante at justo facilisis imperdiet ut mattis urna. Etiam maximus lacus et augue faucibus suscipit. Quisque interdum tincidunt auctor. Curabitur eu nisi vitae arcu vulputate sodales.</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div style="background-color: #d0d0d0; width: 100%; height: 100%;">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
