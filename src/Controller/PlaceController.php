@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Place;
 use App\Form\PlaceType;
-use Doctrine\DBAL\Driver\SQLSrv\LastInsertId;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,11 +18,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class PlaceController extends AbstractController
 {
     /**
+     * @param $id
+     * @return Response
      * @Route("/{id}", requirements={"id", "\d+"})
      */
-    public function index(Place $place)
+    public function index($id)
     {
-
+        dump($_SERVER);
+        $repository = $this->getDoctrine()->getManager()->getRepository(Place::class);
+        $place = $repository->find($id);
+        dump($place);
         return $this->render(
             'place/index.html.twig',
             [
@@ -36,12 +40,13 @@ class PlaceController extends AbstractController
 
     /**
      * @param Request $request
-     * @param Place $place
+     * @param $id
      * @return Response
      * @Route("/ajouter-lieu/{id}", defaults={"id": null}, requirements={"id": "\d+"})
      */
     public function addPlace(Request $request, $id)
     {
+        dump($_SERVER);
         $em = $this->getDoctrine()->getManager();
         if (is_null($id))
         {
@@ -66,6 +71,7 @@ class PlaceController extends AbstractController
                 $this->addFlash('success', 'Votre lieu a bien été enregistré dans la base de données');
 
 
+//                return $this->redirectToRoute('app_index_index');
                 return $this->redirectToRoute('app_place_index', ['id'=>$place->getId()]);
             }
             else
