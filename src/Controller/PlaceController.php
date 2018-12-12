@@ -36,22 +36,13 @@ class PlaceController extends AbstractController
 
     /**
      * @param Request $request
-     * @param Place $place
+     * @ParamConverter("place", class="App:Entity:Place")
      * @return Response
-     * @Route("/ajouter-lieu/{id}", defaults={"id": null}, requirements={"id": "\d+"})
+     * @Route("/ajouter-lieu/{place}")
      */
-    public function addPlace(Request $request, $id)
+    public function addPlace(Request $request, $place = null)
     {
         $em = $this->getDoctrine()->getManager();
-        if (is_null($id))
-        {
-            $place = new Place();
-        }
-        else
-        {
-            $repository = $em->getRepository(Place::class);
-            $place = $repository->find($id);
-        }
 
         $form = $this->createForm(PlaceType::class, $place);
         $form->handleRequest($request);
