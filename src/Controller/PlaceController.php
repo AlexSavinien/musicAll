@@ -44,6 +44,9 @@ class PlaceController extends AbstractController
     public function addPlace(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
+        // DEBUT - Syntaxe pour l'image dans le formulaire
+        // TODO : faire les images avec julien
+
         if (is_null($id))
         {
             $place = new Place();
@@ -61,6 +64,7 @@ class PlaceController extends AbstractController
         {
             if ($form->isValid())
             {
+
                 $em->persist($place);
                 $em->flush();
 

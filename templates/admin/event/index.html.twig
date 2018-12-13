@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>Gestion des événements</h1>
+    <table class="table table-striped">
+        <tr>
+            <th>Nom</th>
+            <th>Lieu</th>
+            <th>Date</th>
+            <th width="250px"></th>
+        </tr>
+        {% for event in events %}
+            <tr>
+                <td>{{ event.name }}</td>
+                <td>{{ event.place.address }}</td>
+                <td>{{ event.eventDate|date('d-m-Y  •  H:i') }}</td>
+
+                <td>
+                    <a href="{{ path('app_event_addevent', {id: event.id}) }}"
+                       class="btn btn-primary">
+                        Modifier l'événement
+                    </a>
+                    <a href="{{ path('app_admin_event_delete', {id: event.id}) }}"
+                       class="btn btn-danger">
+                        X
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

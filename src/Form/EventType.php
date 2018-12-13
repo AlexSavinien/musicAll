@@ -24,31 +24,31 @@ class EventType extends AbstractType
             ->add('name',
                 TextType::class,
                 [
-                    'label' => "Nom de l'événement"
+                    'label' => "Nom de l'événement *"
                 ]
             )
             ->add('eventDate',
                 DateTimeType::class,
                 [
-                    'label' => "Date de l'événement"
+                    'label' => "Date de l'événement *"
                 ]
             )
             ->add('description',
                 TextareaType::class,
                 [
-                    'label' => "Description"
+                    'label' => "Description *"
                 ]
             )
             ->add('artist',
                 TextType::class,
                 [
-                    'label' => "Artistes de l'événement"
+                    'label' => "Artistes de l'événement *"
                 ]
             )
             ->add('style',
                 TextType::class,
                 [
-                    'label' => "Style(s) de musique"
+                    'label' => "Style(s) de musique *"
                 ]
             )
 //            ->add('image',

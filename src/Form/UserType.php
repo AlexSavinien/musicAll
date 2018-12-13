@@ -22,14 +22,14 @@ class UserType extends AbstractType
                 'lastname',
                 TextType::class,
                 [
-                    'label' => 'Nom'
+                    'label' => 'Nom *'
                 ]
             )
             ->add(
                 'firstname',
                 TextType::class,
                 [
-                    'label' => 'Prénom'
+                    'label' => 'Prénom *'
                 ]
             )
 
@@ -37,7 +37,7 @@ class UserType extends AbstractType
                 'birthdate', // TODO : revoir le format de la date
                 BirthdayType::class,
                 [
-                    'label' => 'Date de naissance'
+                    'label' => 'Date de naissance *'
                 ]
             )
 
@@ -45,7 +45,7 @@ class UserType extends AbstractType
                 'pseudo',
                 TextType::class,
                 [
-                    'label' => 'Pseudo'
+                    'label' => 'Pseudo *'
                 ]
             )
 
@@ -53,7 +53,7 @@ class UserType extends AbstractType
                 'adress',
                 TextType::class,
                 [
-                    'label' => 'Adresse'
+                    'label' => 'Adresse *'
                 ]
             )
 
@@ -61,7 +61,7 @@ class UserType extends AbstractType
                 'zipCode',
                 TextType::class,
                 [
-                    'label' => 'Code postal'
+                    'label' => 'Code postal *'
                 ]
             )
 
@@ -78,7 +78,7 @@ class UserType extends AbstractType
                 'email',
                 EmailType::class,
                 [
-                    'label' => 'Email'
+                    'label' => 'Email *'
                 ]
             )
 
@@ -88,10 +88,10 @@ class UserType extends AbstractType
                 [
                     'type' => PasswordType::class,
                     'first_options' => [
-                        'label' => 'Mot de passe'
+                        'label' => 'Mot de passe *'
                     ],
                     'second_options' => [
-                        'label' => 'Confirmation du mot de passe'
+                        'label' => 'Confirmation du mot de passe *'
                     ],
                     'invalid_message' => 'La confirmation ne correspond pas au mot de passe.'
                 ]
