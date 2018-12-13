@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    {# TODO faire l'iframe de la carte avec pictos #}
 
     <div class="container">
         <div class="row mt-5">
@@ -9,13 +10,22 @@
         <div class="row">
             <div class="col-md-6">
                 <div>
-                    <p>Adresse : <span style="color: #CD3C30;">{{ place.address }} - {{ place.zipCode }} - ville</span></p>
+                    <p>Evenement : <span style="color: #CD3C30;">{{ event.place.address }} - {{ event.eventDate| date('Y-m-d H:i') }}</span></p>
                 </div>
                 <div>
-                    <p>Téléphone : <span style="color: #CD3C30;">{{ place.phone }}</span></p>
+                    <p>Artiste : <span style="color: #CD3C30;">{{ event.artist }}</span></p>
                 </div>
                 <div>
-                    <p>Email de l'établissement : <span style="color: #CD3C30;">{{ place.email }}</span></p>
+                    <p>Style musical : <span style="color: #CD3C30;">{{ event.style }}</span></p>
+                </div>
+                <div>
+                    <p>Prix : <span style="color: #CD3C30;">{{ event.price }}</span></p>
+                </div>
+                <div>
+                    <p>Site Internet : <span style="color: #CD3C30;">{{ event.urlEvent }}</span></p>
+                </div>
+                <div>
+                    <p>Billetterie : <span style="color: #CD3C30;">{{ event.urlTicketing }}</span></p>
                 </div>
                 <div>
                     <p>Description : </p>
@@ -23,9 +33,7 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div style="background-color: #d0d0d0; width: 100%; height: 100%;">
-
-                </div>
+                <div style="background-color: #d0d0d0; width: 100%; height: 100%;"></div>
             </div>
         </div>
         <div class="row mt-5">

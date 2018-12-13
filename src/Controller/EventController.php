@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 /**
  * Class EventController
  * @package App\Controller
@@ -17,15 +18,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class EventController extends AbstractController
 {
     /**
-     * @Route("/")
+     * @Route("/{id}", requirements={"id": "\d+"})
      */
-    public function index()
+    public function index(Event $event)
     {
 
         return $this->render(
             'event/index.html.twig',
             [
-
+                'event' => $event
             ]
         );
     }
@@ -59,8 +60,10 @@ class EventController extends AbstractController
             {
                 $em->persist($event);
                 $em->flush();
-                $this->redirectToRoute('app_index_index');
                 $this->addFlash('success', 'Votre événement a bien été enregistré dans la base de données');
+
+                return $this->redirectToRoute('app_event_index', ['id'=>$event->getId()]);
+
             }
             else
             {
@@ -71,7 +74,8 @@ class EventController extends AbstractController
         return $this->render(
             'event/addEvent.html.twig',
             [
-                'form'  => $form->createView()
+                'form'  => $form->createView(),
+                'event' => $event
             ]
         );
     }
