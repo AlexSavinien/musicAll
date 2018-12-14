@@ -5,6 +5,7 @@
         <title>{% block title %}Blog Symfony !{% endblock %}</title>
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('lib/bootstrap/bootstrap.min.css') }}">
+            <link href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
             <link rel="stylesheet" href="{{ asset('styles/style.css') }}">
         {% endblock %}
     </head>
@@ -43,7 +44,7 @@
     <nav id="navbar2" class="navbar navbar-expand-md navbar-dark bg-secondary">
         <div class="container navbar-nav">
             <a class="navbar-brand" href="">
-                <img src="{{ asset('images/musicall.png') }}" alt="logo musicall" style="width: 50%">
+                <img src="{{ asset('images/logo_musicall.svg') }}" alt="logo musicall" style="height: 50px;">
             </a>
             <div class="navbar-brand">
                 <ul class="navbar-nav">
@@ -51,33 +52,38 @@
                     {% if app.user is null %}
 
                         {# app.user : l'utilisateur connecté #}
+                        <li><img src="{{ asset('images/picto_user.svg') }}" alt="logo musicall" style="height: 25px;"></li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('app_security_register') }}">
                                 Inscription
                             </a>
                         </li>
+                        <li><img src="{{ asset('images/picto_connect.svg') }}" alt="logo musicall" style="height: 25px;"></li>
                         <li class="nav-item">
-
                             <a class="nav-link" href="{{ path('app_security_login') }}">
                                 Connexion
                             </a>
                         </li>
                     {% else %}
+                        <li><img src="{{ asset('images/picto_user.svg') }}" alt="logo musicall" style="height: 25px;"></li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('app_security_register', {id: app.user.id} ) }}">
                                 {{ app.user.pseudo }}
                             </a>
                         </li>
+                        <li><img src="{{ asset('images/picto_map.svg') }}" alt="logo musicall" style="height: 25px;"></li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('app_place_addplace') }}">
                                 Ajouter un lieu
                             </a>
                         </li>
+                        <li><img src="{{ asset('images/picto_date.svg') }}" alt="logo musicall" style="height: 25px;"></li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('app_event_addevent') }}">
                                 Ajouter un événement
                             </a>
                         </li>
+                        <li><img src="{{ asset('images/picto_connect.svg') }}" alt="logo musicall" style="height: 25px;"></li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('app_security_logout') }}">
                                 Déconnexion

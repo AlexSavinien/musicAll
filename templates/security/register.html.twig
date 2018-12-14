@@ -7,16 +7,11 @@
 
 {% block body %}
 
-    <h1>Inscription</h1>
+    <h1 class="mt-5">Inscription</h1>
 
-    <div class="container">
+    <div class="container mt-3">
 
         {{ form_start(form) }}
-        <div class="row">
-            <div class="col-md-12">
-                {{ form_row(form.pseudo) }}
-            </div>
-        </div>
         <div class="row">
             <div class="col-12 col-md-6">
                 {{ form_row(form.firstname) }}
@@ -25,8 +20,14 @@
                 {{ form_row(form.lastname) }}
             </div>
         </div>
-        {{ form_row(form.birthdate) }}
-
+        <div class="row">
+            <div class="col-12 col-md-6">
+                {{ form_row(form.pseudo) }}
+            </div>
+            <div class="col-12 col-md-6">
+                {{ form_row(form.birthdate) }}
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-12">
                 {{ form_row(form.adress) }}

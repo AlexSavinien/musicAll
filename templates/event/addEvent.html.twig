@@ -2,25 +2,26 @@
 
 {% block body %}
 
-    <h1>Ajouter un événement</h1>
-
-    {{ form_start(form) }}
-        {{ form_row(form.name) }}
-        {{ form_row(form.place) }}
-            <p>Si le lieu que vous cherchez n'existe pas, <a href="{{ path('app_place_addplace') }}">cliquez ici</a> !</p>
-        {{ form_row(form.eventDate) }}
-        {{ form_row(form.artist) }}
-        {{ form_row(form.style) }}
-        {{ form_row(form.description) }}
-        {{ form_row(form.urlTicketing) }}
-        {{ form_row(form.urlEvent) }}
-        {{ form_row(form.price) }}
-    <div class="text-right">
-        <button type="submit" class="btn btn-primary">
-            Enregistrer
-        </button>
+    <h1 class="mt-5">Ajouter un événement</h1>
+    <div class="mt-3">
+        {{ form_start(form) }}
+            {{ form_row(form.name) }}
+            {{ form_row(form.place) }}
+                <p>Si le lieu que vous cherchez n'existe pas, <a href="{{ path('app_place_addplace') }}">cliquez ici</a> !</p>
+            {{ form_row(form.eventDate) }}
+            {{ form_row(form.artist) }}
+            {{ form_row(form.style) }}
+            {{ form_row(form.description) }}
+            {{ form_row(form.urlTicketing) }}
+            {{ form_row(form.urlEvent) }}
+            {{ form_row(form.price) }}
+        <div class="text-right">
+            <button type="submit" class="btn btn-primary">
+                Enregistrer
+            </button>
+        </div>
+        {{ form_end(form) }}
     </div>
-    {{ form_end(form) }}
 
 
 {% endblock %}

@@ -1,3 +1,7 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
 .bg-secondary{
     background-color: #f4f4f4!important;
 }
@@ -12,4 +16,39 @@
 
 #navbar2 a.nav-link:hover{
     color: #710914!important;
+}
+
+ul.navbar-nav a {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+
+@media (min-width: 768px){
+    .navbar-expand-md .navbar-nav {
+        align-items: center;
+    }
+}
+
+#navbar2 li img {
+    margin-left: 30px;
+}
+
+
+.btn-primary {
+    color: #fff;
+    background-color: #CD3C30;
+    border-color: #710914;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #710914;
+    border-color: #710914;
+}
+
+.h1, h1 {
+    font-size: 2rem;
+    font-weight: 200;
+    color: gray;
 }

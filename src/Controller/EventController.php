@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\Event;
+use App\Form\CommentType;
 use App\Form\EventType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,13 +22,49 @@ class EventController extends AbstractController
     /**
      * @Route("/{id}", requirements={"id": "\d+"})
      */
-    public function index(Event $event)
+    public function index(Request $request, Event $event)
     {
+
+        $em = $this->getDoctrine()->getManager();
+
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                $comment
+                    ->setPublicationDate(new \DateTime())
+                    ->setAuthor($this->getUser())
+                    ->setEvent($event)
+                ;
+
+                $em->persist($comment);
+                $em->flush();
+
+                $this->addFlash(
+                    'success',
+                    'Votre commentaire est enregistré'
+                );
+
+                // redirection vers la page sur laquelle on est
+                // pour ne pas être en POST
+                return $this->redirectToRoute(
+                // la route de la page courante
+                    $request->get('_route'),
+                    [
+                        'id' => $event->getId()
+                    ]
+                );
+            }
+        }
 
         return $this->render(
             'event/index.html.twig',
             [
-                'event' => $event
+                'event' => $event,
+                'form' => $form->createView()
             ]
         );
     }

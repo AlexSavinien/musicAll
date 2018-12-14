@@ -20,7 +20,7 @@
                 </div>
                 <div>
                     <p>Description : </p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ac mi urna. Proin ullamcorper arcu tellus, at consequat nisi posuere eu. In volutpat nisi quis metus imperdiet malesuada. Cras ac eros eget eros tempus iaculis. Duis a mattis urna. Maecenas mattis ornare nisl, consequat elementum lectus eleifend ut. Proin sed ante at justo facilisis imperdiet ut mattis urna. Etiam maximus lacus et augue faucibus suscipit. Quisque interdum tincidunt auctor. Curabitur eu nisi vitae arcu vulputate sodales.</p>
+                    <p>{{ place.description|nl2br }}</p>
                 </div>
             </div>
             <div class="col-md-6">
@@ -43,6 +43,17 @@
                 <div style="background-color: #d0d0d0; width: 100%; height: 150px;"></div>
             </div>
         </div>
+        <form method="POST">
+            <div class="container mt-5">
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Déposer un commentaire</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary">Valider</button>
+            </div>
+        </form>
     </div>
 
 

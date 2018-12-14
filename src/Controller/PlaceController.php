@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\Place;
+use App\Form\CommentType;
 use App\Form\PlaceType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -23,8 +25,43 @@ class PlaceController extends AbstractController
      *
      * @Route("/{id}", requirements={"id": "\d+"})
      */
-    public function index(Place $place)
+    public function index(Request $request, Place $place)
     {
+
+        $em = $this->getDoctrine()->getManager();
+
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                $comment
+                    ->setPublicationDate(new \DateTime())
+                    ->setAuthor($this->getUser())
+                    ->setPlace($place->getId())
+                ;
+
+                $em->persist($comment);
+                $em->flush();
+
+                $this->addFlash(
+                    'success',
+                    'Votre commentaire est enregistré'
+                );
+
+                // redirection vers la page sur laquelle on est
+                // pour ne pas être en POST
+                return $this->redirectToRoute(
+                // la route de la page courante
+                    $request->get('_route'),
+                    [
+                        'id' => $place->getId()
+                    ]
+                );
+            }
+        }
 
         return $this->render(
             'place/index.html.twig',

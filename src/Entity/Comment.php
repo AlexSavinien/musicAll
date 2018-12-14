@@ -35,10 +35,16 @@ class Comment
     private $author;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\event", inversedBy="comments")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Event", inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
      */
     private $event;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Place", inversedBy="comments")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $place;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\user", inversedBy="likedComments")
@@ -128,4 +134,24 @@ class Comment
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getPlace(): ?Place
+    {
+        return $this->place;
+    }
+
+    /**
+     * @param mixed $place
+     * @return Comment
+     */
+    public function setPlace($place): self
+    {
+        $this->place = $place;
+        return $this;
+    }
+
+
 }

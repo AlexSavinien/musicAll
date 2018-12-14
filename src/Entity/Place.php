@@ -98,6 +98,17 @@ class Place
      */
     private $events;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="place")
+     */
+    private $comments;
+
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $description;
+
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -328,6 +339,55 @@ class Place
     public function setImage($image)
     {
         $this->image = $image;
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setPlace($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->contains($comment)) {
+            $this->comments->removeElement($comment);
+            // set the owning side to null (unless already changed)
+            if ($comment->getPlace() === $this) {
+                $comment->setPlace(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param mixed $description
+     * @return Place
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
         return $this;
     }
 
