@@ -93,6 +93,7 @@ class PlaceType extends AbstractType
                 EntityType::class,
                 [
                     'label' => 'Propriétaire',
+                    'data' => 'Propiétaire inconnu',
                     'class' => User::class,
                     'expanded' => false,
                     'multiple' => false

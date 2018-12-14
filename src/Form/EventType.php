@@ -30,7 +30,22 @@ class EventType extends AbstractType
             ->add('eventDate',
                 DateTimeType::class,
                 [
-                    'label' => "Date de l'événement *"
+                    'label' => "Date de l'événement *",
+                    'placeholder' => array(
+                        'year' => 'Année',
+                        'month' => 'Mois',
+                        'day' => 'Jour',
+                        'hour' => 'Heure',
+                        'minute' => 'Minute',
+                        'second' => 'Second'),
+                    'years' =>
+                    [
+                        '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025', '2026', '2027', '2028'
+                    ],
+                    'minutes' => [
+                        '00', '15', '30', '45'
+                    ]
+
                 ]
             )
             ->add('description',
@@ -84,7 +99,8 @@ class EventType extends AbstractType
                 [
                     'class' => Place::class,
                     'label' => "Lieu de l'événement",
-                    'choice_label' => 'name'
+                    'choice_label' => 'name',
+                    'placeholder' => 'Choisissez un lieu...'
                 ]
             )
         ;

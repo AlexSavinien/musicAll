@@ -1,6 +1,15 @@
 .bg-secondary{
-    background-color: #f4f4f4;
+    background-color: #f4f4f4!important;
 }
 
-a.nav-link{
+#navbar1{
+    background-color: #6D605F!important;
+}
+
+#navbar2 a.nav-link{
+    color: #CD3C30!important;
+}
+
+#navbar2 a.nav-link:hover{
+    color: #710914!important;
 }

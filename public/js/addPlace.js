@@ -12,15 +12,12 @@ $(document).ready(function(){
            [],
            function(retour){
                console.log(retour);
-               console.log(retour[0].display_name);
                console.log(retour[0].lat);
                console.log(retour[0].lon);
                let lat = retour[0].lat;
                let lon = retour[0].lon;
-               let town = retour[0].display_name[1]; //todo : revoir le bug pour automatiser Town
                $('#place_lat').val(lat);
                $('#place_lon').val(lon);
-               $('#place_town').val(town);
 
            }
        );
