@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Event;
+use App\Entity\Place;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -49,10 +50,12 @@ class EventRepository extends ServiceEntityRepository
         $cnx = $this->getEntityManager()->getConnection();
 
         return $qb
-            ->orWhere('e.artist like ' . $cnx->quote('%'.$research.'%'))
-            ->orWhere('e.name like %' . $cnx->quote('%'.$research.'%'))
-            ->orWhere('e.place like %' . $cnx->quote('%'.$research.'%'))
-            ->orWhere('e.style like %' . $cnx->quote('%'.$research.'%'))
+            ->join('e.place', 'p')
+            ->orWhere('e.artist LIKE ' . $cnx->quote('%'.$research.'%'))
+            ->orWhere('e.name LIKE ' . $cnx->quote('%'.$research.'%'))
+            ->orWhere('p.name LIKE ' . $cnx->quote('%'.$research.'%'))
+            ->orWhere('e.style LIKE ' . $cnx->quote('%'.$research.'%'))
+            ->orWhere('e.eventDate LIKE' . $cnx->quote('%'.$research.'%'))
             ->setMaxResults(50)
             ->getQuery()
             ->getResult()

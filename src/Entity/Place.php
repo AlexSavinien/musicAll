@@ -40,7 +40,7 @@ class Place
     private $phone;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\user", inversedBy="places")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="places")
      * @ORM\JoinColumn(nullable=true)
      * @Assert\NotBlank(message="Champ obligatoire")
      */

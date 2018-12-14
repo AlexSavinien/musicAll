@@ -64,7 +64,7 @@ class Event
     private $price;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\place", inversedBy="events")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Place", inversedBy="events")
      * @ORM\JoinColumn(nullable=false)
      */
     private $place;
@@ -77,6 +77,11 @@ class Event
     public function __construct()
     {
         $this->comments = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->getName();
     }
 
     public function getId(): ?int

@@ -9,15 +9,28 @@
     <link rel="stylesheet" href="{{ asset('styles/map.css') }}">
 {% endblock %}
 {% block body %}
+    {% block jsMap %}
 
-        {% block jsMap %}
+    {% endblock %}
+        <div class="row">
+            <div class="col-md-3" id="rechercheContainer">
+                <div class="form-group" id="rechercheForm">
+                    <form method="post">
+                        <label for="recherche"></label>
+                        <input type="search" class="form-group" id="recherche" name="recherche">
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div id="mapid">
+
+            </div>
+        </div>
 
 
-        {% endblock %}
 
-        {% block map %}
-            <div id="mapid"></div>
-        {% endblock %}
+
 
 {% endblock %}
 {% block javascripts %}
