@@ -98,6 +98,7 @@ class Event
 
     public function getEventDate(): ?\DateTimeInterface
     {
+
         return $this->eventDate;
     }
 

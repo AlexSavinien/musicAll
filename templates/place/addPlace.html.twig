@@ -3,6 +3,7 @@
 {% block title %}Music's Places{% endblock %}
 
 {% block body %}
+    <h1>Ajouter un lieu</h1>
 
 {{ form_start(form) }}
     {{ form_row(form.name) }}
@@ -11,8 +12,11 @@
     {{ form_row(form.streetNumber) }}
     {{ form_row(form.streetName) }}
     {{ form_row(form.zipCode) }}
+    {{ form_row((form.town)) }}
+
     {{ form_row(form.lat) }}
     {{ form_row(form.lon) }}
+    <p>En cas de soucis de localisation, <a href="https://www.coordonnees-gps.fr/" target="_blank">cliquez ici</a> !</p>
     {% if place.id is null %}
         {{ form_row(form.owner) }}
     {% endif %}

@@ -74,6 +74,12 @@ class Place
     private $zipCode;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Champ obligatoire")
+     */
+    private $town;
+
+    /**
      * @ORM\Column(type="float")
      * @Assert\NotBlank(message="Champ obligatoire")
      *
@@ -92,6 +98,14 @@ class Place
      */
     private $events;
 
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\Image(maxSize="1M",
+     *     maxSizeMessage="Le fichier ne doit pas faire plus de 1Mo",
+     *     mimeTypesMessage="Le fichier doit être une image")
+     */
+    private $image;
 
     public function __construct()
     {
@@ -176,6 +190,25 @@ class Place
         $this->zipCode = $zipCode;
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getTown()
+    {
+        return $this->town;
+    }
+
+    /**
+     * @param mixed $town
+     * @return Place
+     */
+    public function setTown($town)
+    {
+        $this->town = $town;
+        return $this;
+    }
+
 
     /**
      * @return mixed
@@ -279,5 +312,25 @@ class Place
         $this->streetName = $streetName;
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param mixed $image
+     * @return Place
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+        return $this;
+    }
+
+
 
 }

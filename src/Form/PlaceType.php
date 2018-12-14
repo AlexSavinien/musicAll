@@ -22,25 +22,25 @@ class PlaceType extends AbstractType
             ->add('name',
                 TextType::class,
                 [
-                    'label' => 'Nom du lieu'
+                    'label' => 'Nom du lieu *'
                 ]
                 )
             ->add('email',
                 EmailType::class,
                 [
-                    'label' => 'Email du lieu'
+                    'label' => 'Email du lieu *'
                 ]
                 )
             ->add('phone',
                 TelType::class,
                 [
-                    'label' => 'Téléphone'
+                    'label' => 'Téléphone *'
                 ]
                 )
             ->add('streetNumber',
                 IntegerType::class,
                 [
-                    'label' => 'Numéro de rue',
+                    'label' => 'Numéro de rue *',
                     'attr' =>
                         [
                             'class' => 'adresse'
@@ -50,7 +50,7 @@ class PlaceType extends AbstractType
             ->add('streetName',
                 TextType::class,
                 [
-                    'label'=> 'Type et nom de la voie',
+                    'label'=> 'Type et nom de la voie *',
                     'attr' =>
                         [
                             'class' => 'adresse'
@@ -60,13 +60,23 @@ class PlaceType extends AbstractType
             ->add('zipCode',
                 IntegerType::class,
                 [
-                    'label' => 'Code postal / ZIP code',
+                    'label' => 'Code postal / ZIP code *',
                     'attr' =>
                         [
                             'class' => 'adresse'
                         ]
                 ]
                 )
+            ->add('town',
+                TextType::class,
+                [
+                    'label' => 'Ville',
+                    'attr' =>
+                    [
+                        'class' => 'adresse'
+                    ]
+                ]
+            )
             ->add('lon',
                 NumberType::class,
                 [
@@ -83,6 +93,7 @@ class PlaceType extends AbstractType
                 EntityType::class,
                 [
                     'label' => 'Propriétaire',
+                    'data' => 'Propiétaire inconnu',
                     'class' => User::class,
                     'expanded' => false,
                     'multiple' => false
