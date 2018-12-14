@@ -3,10 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Event;
+use App\Entity\Place;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+
 
 /**
  * Class MapController
@@ -15,11 +17,15 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class MapController extends AbstractController
 {
+
+    //, {id} defaults={"id" : null}, requirements={"id": "/d+"}
     /**
      * @Route("/")
      */
     public function index()
     {
+
+
 
         return $this->render(
             'map/index.html.twig',
@@ -39,13 +45,41 @@ class MapController extends AbstractController
         {
             $em = $this->getDoctrine()->getManager();
             // Je récupère la recherche de l'utilisateur
-            $research = $request->request->get('research');
-            // Je stock dans une entrée d'un tableau le résultat de ma recherche d'évenement
-            $tab['resultat'] = $em->getRepository(Event::class)->findEvent($research);
+            $research = $request->query->get('research');
+
+
+            /**
+             * Si la recherche est nulle,
+             *      alors on envois les 50 événements qui auront lieu au plus tot
+             * Si non,
+             *      alors on envois les 50 événements trouvé par la recherche (par date, lieu, artist, style, nom)
+             */
+            if (is_null($research))
+            {
+                $events = $em->getRepository(Event::class)->findBy([], ['eventDate'=>'asc'], 50);
+            }
+            else
+            {
+                $events = $em->getRepository(Event::class)->findEvent($research);
+            }
+
+            $tab = [];
+            $i = 0;
+
+            foreach ($events as $event) {
+                $place = $event->getPlace();
+                dump($event);
+                $tab[$i]['lat'] = $place->getLat();
+                $tab[$i]['lon'] = $place->getLon();
+                $tab[$i]['place'] = $place->getName();
+                $tab[$i]['name'] = (string)$event;
+                $tab[$i]['artist'] = $event->getArtist();
+                $i++;
+            }
         }
         else
         {
-            echo "Ne reçois pas d'appel AJAX";
+            $tab['resultat'] = "Ne reçois pas d'appel AJAX";
         }
 
         return new JsonResponse($tab);

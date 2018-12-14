@@ -17,15 +17,18 @@ use Symfony\Component\Routing\Annotation\Route;
 class EventController extends AbstractController
 {
     /**
-     * @Route("/")
+     * @param Event $event
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @Route("/{id}", requirements={"id": "\d+"})
      */
-    public function index()
+    public function index(Event $event)
     {
 
         return $this->render(
             'event/index.html.twig',
             [
-
+                'event' => $event
             ]
         );
     }
