@@ -32,7 +32,7 @@ $(document).ready(function(){
     map._layersMinZoom=5;
 
 
-    let research = $(this).val();
+
     // Création de layer de base
     var eventsBase = L.layerGroup([]);
     var eventsResearch = L.layerGroup([]);
@@ -50,14 +50,15 @@ $(document).ready(function(){
             /**
              * Boucle d'affichage des événements grâce à des markers
              */
-            for (var i=0; i<retour.length; i++)
+            for (let i=0; i<retour.length; i++)
             {
-                var marker = L.marker([retour[i].lat, retour[i].lon]);
+                let marker = L.marker([retour[i].lat, retour[i].lon]);
                 marker.bindPopup(
                     "<p>"+ retour[i].place +"</p>"+
                     "<p>"+ retour[i].name +"</p>"+
                     "<p>"+ retour[i].artist +"</p>"+
-                    "<p>"+ retour[i].style +"</p>"
+                    "<p>"+ retour[i].style +"</p>"+
+                    "<a href='/event/"+ retour[i].id + "'>Plus d'info</a>"
                 );
                 // ajout du marker au layer de base
                 eventsBase.addLayer(marker)
@@ -76,13 +77,7 @@ $(document).ready(function(){
      */
     $('#recherche').on('input', function(){
         console.log("j'écris bien dans la recherche");
-        // je récupère la valeur du champ de recherche
-
-
-        // Reset de la map
-        map.removeLayer(eventsBase);
-        map.addLayer(eventsResearch);
-
+        let research = $(this).val();
         $.get(
             '/home/map-ajax?research='+research,
             function(retour){
@@ -90,31 +85,24 @@ $(document).ready(function(){
                 console.log(retour);
 
                 /**
-                 * Config de mapbox pour avoir leur carte
-                 * token : pk.eyJ1IjoiYWxleHNhdmluaWVuIiwiYSI6ImNqcGR3OHh5czA4b24zcHF0NnhvYnQzdjUifQ.yH3ow0zJP1v-Kvjueuke-Q
-                 */
-                L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-                    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-                    maxZoom: 18,
-                    id: 'mapbox.streets',
-                    accessToken: 'pk.eyJ1IjoiYWxleHNhdmluaWVuIiwiYSI6ImNqcGR3OHh5czA4b24zcHF0NnhvYnQzdjUifQ.yH3ow0zJP1v-Kvjueuke-Q'
-                }).addTo(map);
-
-
-                /**
                  * Boucle d'affichage des événements grâce à des markers
                  */
-                for (var i=0; i<retour.length; i++)
+                for (let i=0; i<retour.length; i++)
                 {
-                    var marker = L.marker([retour[i].lat, retour[i].lon]);
+                    let marker = L.marker([retour[i].lat, retour[i].lon]);
                     marker.bindPopup(
                         "<p>"+ retour[i].place +"</p>"+
                         "<p>"+ retour[i].name +"</p>"+
                         "<p>"+ retour[i].artist +"</p>"+
-                        "<p>"+ retour[i].style +"</p>"
+                        "<p>"+ retour[i].style +"</p>"+
+                        "<a href='/event/"+ retour[i].id + "'>Plus d'info</a>"
                     );
                     eventsResearch.addLayer(marker)
                 }
+
+                // Reset de la map
+                map.removeLayer(eventsBase);
+                map.addLayer(eventsResearch);
 
             },
             'json'                                      // format de la réponse ajax

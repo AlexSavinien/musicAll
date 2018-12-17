@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\Comment;
+use App\Entity\CommentEvent;
 use App\Entity\Event;
-use App\Form\CommentType;
+use App\Form\CommentEventType;
 use App\Form\EventType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,19 +21,21 @@ class EventController extends AbstractController
 {
     /**
      * @Route("/{id}", requirements={"id": "\d+"})
+     * @param Request $request
+     * @param Event $event
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function index(Request $request, Event $event)
+    public function index(Event $event)
     {
-
         $em = $this->getDoctrine()->getManager();
-
-        $comment = new Comment();
-        $form = $this->createForm(CommentType::class, $comment);
-
+        // =============================== FORMULAIRE ======================================
+        $comment = new CommentEvent();
+        $form = $this->createForm(CommentEventType::class, $comment);
         $form->handleRequest($request);
-
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
+        if($form->isSubmitted())
+        {
+            if ($form->isValid())
+            {
                 $comment
                     ->setPublicationDate(new \DateTime())
                     ->setAuthor($this->getUser())
@@ -42,29 +44,24 @@ class EventController extends AbstractController
 
                 $em->persist($comment);
                 $em->flush();
-
-                $this->addFlash(
-                    'success',
-                    'Votre commentaire est enregistré'
-                );
-
-                // redirection vers la page sur laquelle on est
-                // pour ne pas être en POST
-                return $this->redirectToRoute(
-                // la route de la page courante
-                    $request->get('_route'),
-                    [
-                        'id' => $event->getId()
-                    ]
-                );
+                $this->addFlash('success', 'Votre commentaire a bien été enregistré');
+            }
+            else
+            {
+                $this->addFlash('error', 'Le commentaire contient des erreurs');
             }
         }
+
+
+        // =========================== LISTE COMMENTAIRES ==================================
+        $comments = $event->getCommentsEvent();
 
         return $this->render(
             'event/index.html.twig',
             [
                 'event' => $event,
-                'form' => $form->createView()
+                'form'  => $form->createView(),
+                'comments' => $comments
             ]
         );
     }

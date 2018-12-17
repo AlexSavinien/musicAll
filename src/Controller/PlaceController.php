@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\Comment;
+use App\Entity\CommentPlace;
 use App\Entity\Place;
-use App\Form\CommentType;
+use App\Form\CommentPlaceType;
 use App\Form\PlaceType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -27,46 +27,41 @@ class PlaceController extends AbstractController
      */
     public function index(Request $request, Place $place)
     {
-
         $em = $this->getDoctrine()->getManager();
-
-        $comment = new Comment();
-        $form = $this->createForm(CommentType::class, $comment);
-
+        // =============================== FORMULAIRE ======================================
+        $comment = new CommentPlace();
+        $form = $this->createForm(CommentPlaceType::class, $comment);
         $form->handleRequest($request);
-
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
+        if($form->isSubmitted())
+        {
+            if ($form->isValid())
+            {
                 $comment
                     ->setPublicationDate(new \DateTime())
                     ->setAuthor($this->getUser())
-                    ->setPlace($place->getId())
+                    ->setPlace($place)
                 ;
 
                 $em->persist($comment);
                 $em->flush();
-
-                $this->addFlash(
-                    'success',
-                    'Votre commentaire est enregistré'
-                );
-
-                // redirection vers la page sur laquelle on est
-                // pour ne pas être en POST
-                return $this->redirectToRoute(
-                // la route de la page courante
-                    $request->get('_route'),
-                    [
-                        'id' => $place->getId()
-                    ]
-                );
+                $this->addFlash('success', 'Votre commentaire a bien été enregistré');
+            }
+            else
+            {
+                $this->addFlash('error', 'Le commentaire contient des erreurs');
             }
         }
+
+
+        // =========================== LISTE COMMENTAIRES ==================================
+        $comments = $place->getCommentsPlace();
 
         return $this->render(
             'place/index.html.twig',
             [
-                'place' => $place
+                'place' => $place,
+                'form'  => $form->createView(),
+                'comments' => $comments
             ]
         );
 
@@ -116,11 +111,13 @@ class PlaceController extends AbstractController
                 $this->addFlash('error', 'Le formulaire contient des erreurs');
             }
         }
+
+
         return $this->render(
             'place/addPlace.html.twig',
             [
                 'form'  => $form->createView(),
-                'place' => $place
+                'place' => $place,
             ]
         );
     }

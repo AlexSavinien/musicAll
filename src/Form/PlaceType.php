@@ -41,7 +41,7 @@ class PlaceType extends AbstractType
             ->add('streetNumber',
                 IntegerType::class,
                 [
-                    'label' => 'Numéro de rue *',
+                    'label' => 'Numéro *',
                     'attr' =>
                         [
                             'class' => 'adresse'

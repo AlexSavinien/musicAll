@@ -102,17 +102,6 @@ class User implements UserInterface, \Serializable
     private $places;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="author")
-     */
-    private $comments;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Comment", mappedBy="notation")
-     */
-    private $likedComments;
-
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $password;
@@ -123,11 +112,23 @@ class User implements UserInterface, \Serializable
      */
     private $plainPassword;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\CommentPlace", mappedBy="author", orphanRemoval=true)
+     */
+    private $userPlaceComment;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\CommentEvent", mappedBy="author", orphanRemoval=true)
+     */
+    private $userEventComment;
+
     public function __construct()
     {
         $this->places = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->likedComments = new ArrayCollection();
+        $this->userPlaceComment = new ArrayCollection();
+        $this->userEventComment = new ArrayCollection();
     }
 
 
@@ -312,64 +313,7 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
-    /**
-     * @return Collection|Comment[]
-     */
-    public function getComments(): Collection
-    {
-        return $this->comments;
-    }
 
-    public function addComment(Comment $comment): self
-    {
-        if (!$this->comments->contains($comment)) {
-            $this->comments[] = $comment;
-            $comment->setAuthor($this);
-        }
-
-        return $this;
-    }
-
-    public function removeComment(Comment $comment): self
-    {
-        if ($this->comments->contains($comment)) {
-            $this->comments->removeElement($comment);
-            // set the owning side to null (unless already changed)
-            if ($comment->getAuthor() === $this) {
-                $comment->setAuthor(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Comment[]
-     */
-    public function getLikedComments(): Collection
-    {
-        return $this->likedComments;
-    }
-
-    public function addLikedComment(Comment $likedComment): self
-    {
-        if (!$this->likedComments->contains($likedComment)) {
-            $this->likedComments[] = $likedComment;
-            $likedComment->addNotation($this);
-        }
-
-        return $this;
-    }
-
-    public function removeLikedComment(Comment $likedComment): self
-    {
-        if ($this->likedComments->contains($likedComment)) {
-            $this->likedComments->removeElement($likedComment);
-            $likedComment->removeNotation($this);
-        }
-
-        return $this;
-    }
 
     /**
      * @return mixed
@@ -514,5 +458,67 @@ class User implements UserInterface, \Serializable
             $this->styles,
             $this->password
             ) = unserialize($serialized);
+    }
+
+    /**
+     * @return Collection|CommentPlace[]
+     */
+    public function getUserPlaceComment(): Collection
+    {
+        return $this->userPlaceComment;
+    }
+
+    public function addUserPlaceComment(CommentPlace $userPlaceComment): self
+    {
+        if (!$this->userPlaceComment->contains($userPlaceComment)) {
+            $this->userPlaceComment[] = $userPlaceComment;
+            $userPlaceComment->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserPlaceComment(CommentPlace $userPlaceComment): self
+    {
+        if ($this->userPlaceComment->contains($userPlaceComment)) {
+            $this->userPlaceComment->removeElement($userPlaceComment);
+            // set the owning side to null (unless already changed)
+            if ($userPlaceComment->getAuthor() === $this) {
+                $userPlaceComment->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|CommentEvent[]
+     */
+    public function getUserEventComment(): Collection
+    {
+        return $this->userEventComment;
+    }
+
+    public function addUserEventComment(CommentEvent $userEventComment): self
+    {
+        if (!$this->userEventComment->contains($userEventComment)) {
+            $this->userEventComment[] = $userEventComment;
+            $userEventComment->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserEventComment(CommentEvent $userEventComment): self
+    {
+        if ($this->userEventComment->contains($userEventComment)) {
+            $this->userEventComment->removeElement($userEventComment);
+            // set the owning side to null (unless already changed)
+            if ($userEventComment->getAuthor() === $this) {
+                $userEventComment->setAuthor(null);
+            }
+        }
+
+        return $this;
     }
 }
