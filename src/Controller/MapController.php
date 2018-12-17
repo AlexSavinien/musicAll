@@ -74,6 +74,7 @@ class MapController extends AbstractController
                 $tab[$i]['place'] = $place->getName();
                 $tab[$i]['name'] = (string)$event;
                 $tab[$i]['artist'] = $event->getArtist();
+                $tab[$i]['id'] = $event->getId();
                 $i++;
             }
         }

@@ -69,14 +69,17 @@ class Event
      */
     private $place;
 
+
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="event")
+     * @ORM\OneToMany(targetEntity="App\Entity\CommentEvent", mappedBy="event", orphanRemoval=true)
      */
-    private $comments;
+    private $commentsEvent;
+
 
     public function __construct()
     {
-        $this->comments = new ArrayCollection();
+        $this->commentEvents = new ArrayCollection();
+        $this->commentsEvent = new ArrayCollection();
     }
 
     public function __toString()
@@ -211,33 +214,66 @@ class Event
     }
 
     /**
-     * @return Collection|Comment[]
+     * @return Collection|CommentEvent[]
      */
-    public function getComments(): Collection
+    public function getCommentEvents(): Collection
     {
-        return $this->comments;
+        return $this->commentEvents;
     }
 
-    public function addComment(Comment $comment): self
+    public function addCommentEvent(CommentEvent $commentEvent): self
     {
-        if (!$this->comments->contains($comment)) {
-            $this->comments[] = $comment;
-            $comment->setEvent($this);
+        if (!$this->commentEvents->contains($commentEvent)) {
+            $this->commentEvents[] = $commentEvent;
+            $commentEvent->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeComment(Comment $comment): self
+    public function removeCommentEvent(CommentEvent $commentEvent): self
     {
-        if ($this->comments->contains($comment)) {
-            $this->comments->removeElement($comment);
+        if ($this->commentEvents->contains($commentEvent)) {
+            $this->commentEvents->removeElement($commentEvent);
             // set the owning side to null (unless already changed)
-            if ($comment->getEvent() === $this) {
-                $comment->setEvent(null);
+            if ($commentEvent->getUser() === $this) {
+                $commentEvent->setUser(null);
             }
         }
 
         return $this;
     }
+
+    /**
+     * @return Collection|CommentEvent[]
+     */
+    public function getCommentsEvent(): Collection
+    {
+        return $this->commentsEvent;
+    }
+
+    public function addCommentsEvent(CommentEvent $commentsEvent): self
+    {
+        if (!$this->commentsEvent->contains($commentsEvent)) {
+            $this->commentsEvent[] = $commentsEvent;
+            $commentsEvent->setEvent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentsEvent(CommentEvent $commentsEvent): self
+    {
+        if ($this->commentsEvent->contains($commentsEvent)) {
+            $this->commentsEvent->removeElement($commentsEvent);
+            // set the owning side to null (unless already changed)
+            if ($commentsEvent->getEvent() === $this) {
+                $commentsEvent->setEvent(null);
+            }
+        }
+
+        return $this;
+    }
+
+
 }

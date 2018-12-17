@@ -107,9 +107,15 @@ class Place
      */
     private $image;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\CommentPlace", mappedBy="place", orphanRemoval=true)
+     */
+    private $commentsPlace;
+
     public function __construct()
     {
         $this->events = new ArrayCollection();
+        $this->prout = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -328,6 +334,37 @@ class Place
     public function setImage($image)
     {
         $this->image = $image;
+        return $this;
+    }
+
+    /**
+     * @return Collection|CommentPlace[]
+     */
+    public function getCommentsPlace(): Collection
+    {
+        return $this->commentsPlace;
+    }
+
+    public function addCommentsPlace(CommentPlace $commentsPlace): self
+    {
+        if (!$this->commentsPlace->contains($commentsPlace)) {
+            $this->commentsPlace[] = $commentsPlace;
+            $commentsPlace->setPlace($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentsPlace(CommentPlace $commentsPlace): self
+    {
+        if ($this->commentsPlace->contains($commentsPlace)) {
+            $this->commentsPlace->removeElement($commentsPlace);
+            // set the owning side to null (unless already changed)
+            if ($commentsPlace->getPlace() === $this) {
+                $commentsPlace->setPlace(null);
+            }
+        }
+
         return $this;
     }
 

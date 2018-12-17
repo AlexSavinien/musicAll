@@ -2,14 +2,12 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\CommentRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\CommentEventRepository")
  */
-class Comment
+class CommentEvent
 {
     /**
      * @ORM\Id()
@@ -29,26 +27,16 @@ class Comment
     private $content;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\user", inversedBy="comments")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="userEventComment")
      * @ORM\JoinColumn(nullable=false)
      */
     private $author;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\event", inversedBy="comments")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Event", inversedBy="commentsEvent")
      * @ORM\JoinColumn(nullable=false)
      */
     private $event;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\user", inversedBy="likedComments")
-     */
-    private $notation;
-
-    public function __construct()
-    {
-        $this->notation = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -79,52 +67,26 @@ class Comment
         return $this;
     }
 
-    public function getAuthor(): ?user
+    public function getAuthor(): ?User
     {
         return $this->author;
     }
 
-    public function setAuthor(?user $author): self
+    public function setAuthor(?User $author): self
     {
         $this->author = $author;
 
         return $this;
     }
 
-    public function getEvent(): ?event
+    public function getEvent(): ?Event
     {
         return $this->event;
     }
 
-    public function setEvent(?event $event): self
+    public function setEvent(?Event $event): self
     {
         $this->event = $event;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|user[]
-     */
-    public function getNotation(): Collection
-    {
-        return $this->notation;
-    }
-
-    public function addNotation(user $notation): self
-    {
-        if (!$this->notation->contains($notation)) {
-            $this->notation[] = $notation;
-        }
-
-        return $this;
-    }
-
-    public function removeNotation(user $notation): self
-    {
-        if ($this->notation->contains($notation)) {
-            $this->notation->removeElement($notation);
-        }
 
         return $this;
     }
