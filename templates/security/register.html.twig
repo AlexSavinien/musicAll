@@ -45,6 +45,12 @@
         {{ form_row(form.email) }}
 
         {{ form_row(form.image) }}
+        {% if original_image is not null %}
+            <p>
+                Actuellement :
+                <img src="{{ asset('images/' ~ original_image) }}" width="200px">
+            </p>
+        {% endif %}
 
         {{ form_row(form.styles) }}
 

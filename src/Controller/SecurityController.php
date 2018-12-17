@@ -60,7 +60,7 @@ class SecurityController extends AbstractController
 
                     $image = $user->getImage();
                     if (!is_null($image)) {
-                        // non de l'image dans notre application
+                        dump($image);
                         // TODO : S'occuper la prise en charge image
                         $filename = uniqid() . '.' . $image->guessExtension();
 
@@ -100,7 +100,7 @@ class SecurityController extends AbstractController
 
                 $this->addFlash('success', 'Votre compte est créé');
 
-                $this->redirectToRoute('app_security_login');
+                return $this->redirectToRoute('app_security_login');
                 }
             }
 
@@ -108,6 +108,7 @@ class SecurityController extends AbstractController
                 'security/register.html.twig',
                 [
                     'form' => $form->createView(),
+                    'original_image' => $originalImage
                 ]
             );
 

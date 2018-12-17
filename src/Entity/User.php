@@ -239,12 +239,12 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
-    public function getImage(): ?string
+    public function getImage()
     {
         return $this->image;
     }
 
-    public function setImage(?string $image): self
+    public function setImage($image): self
     {
         $this->image = $image;
 
@@ -425,7 +425,7 @@ class User implements UserInterface, \Serializable
             $this->zipCode,
             $this->phone,
             $this->email,
-            $this->image,
+//            $this->image,
             $this->styles,
             $this->password
 
@@ -454,7 +454,7 @@ class User implements UserInterface, \Serializable
             $this->zipCode,
             $this->phone,
             $this->email,
-            $this->image,
+//            $this->image,
             $this->styles,
             $this->password
             ) = unserialize($serialized);

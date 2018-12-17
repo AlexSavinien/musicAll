@@ -7,6 +7,7 @@ use App\Entity\Event;
 use App\Form\CommentEventType;
 use App\Form\EventType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -75,6 +76,8 @@ class EventController extends AbstractController
      */
     public function addEvent(Request $request, $id)
     {
+        $originalImage = null;
+
         $em = $this->getDoctrine()->getManager();
 
         if (is_null($id))
@@ -84,6 +87,16 @@ class EventController extends AbstractController
         else
         {
             $event = $em->getRepository(Event::class)->find($id);
+            if (!is_null($event->getImage())) {
+
+                // nom du fichier venant de la bdd
+                $originalImage = $event->getImage();
+                // on sette l'image avec un objet File
+                // pour le traitement par le formulaire
+                $event->setImage(
+                    new File($this->getParameter('upload_dir') . $originalImage)
+                );
+            }
         }
 
         $form = $this->createForm(EventType::class, $event);
@@ -93,6 +106,38 @@ class EventController extends AbstractController
         {
             if ($form->isValid())
             {
+
+                $image = $event->getImage();
+
+                if (!is_null($image)) {
+                    dump($image);
+                    // TODO : S'occuper la prise en charge image
+                    $filename = uniqid() . '.' . $image->guessExtension();
+
+                    // équivalent de move_uploaded_file()
+                    $image->move(
+                    // répertoire de destination
+                    // cf le parametre upload_dir dans config/services.yaml
+                        $this->getParameter('upload_dir'),
+                        // nom du fichier
+                        $filename
+                    );
+
+                    // on sette l'attribut image de l'article avec le nom
+                    // de l'image pour enregistrement en bdd
+                    $event->setImage($filename);
+
+                    // en modification, on supprime l'ancienne image s'il y en a une
+                    if (!is_null($originalImage)) {
+                        unlink($this->getParameter('upload_dir') . $originalImage);
+                    }
+                } else {
+                    // sans upload, pour la modification, on sette l'attribut
+                    // image avec le nom de l'ancienne image
+                    $event->setImage($originalImage);
+                }
+
+
                 $em->persist($event);
                 $em->flush();
                 $this->addFlash('success', 'Votre événement a bien été enregistré dans la base de données');
@@ -110,7 +155,8 @@ class EventController extends AbstractController
             'event/addEvent.html.twig',
             [
                 'form'  => $form->createView(),
-                'event' => $event
+                'event' => $event,
+                'original_image' => $originalImage
             ]
         );
     }

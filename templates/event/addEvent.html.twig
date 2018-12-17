@@ -14,6 +14,13 @@
             {{ form_row(form.description) }}
             {{ form_row(form.urlTicketing) }}
             {{ form_row(form.urlEvent) }}
+            {{ form_row(form.image) }}
+            {% if original_image is not null %}
+                <p>
+                    Actuellement :
+                    <img src="{{ asset('images/' ~ original_image) }}" width="200px">
+                </p>
+            {% endif %}
             {{ form_row(form.price) }}
         <div class="text-right">
             <button type="submit" class="btn btn-primary">

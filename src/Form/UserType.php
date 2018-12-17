@@ -102,8 +102,7 @@ class UserType extends AbstractType
                 FileType::class,
                 [
                     'label' => 'Photo',
-                    'required' => false,
-                    //'data_class' => null
+                    'required' => false
                 ]
             )
 

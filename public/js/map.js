@@ -30,6 +30,20 @@ $(document).ready(function(){
      * @private
      */
     map._layersMinZoom=5;
+    map.scrollWheelZoom.disable();
+    let enable = 'no';
+    $('#mapid').click(function () {
+        if (enable === "no")
+        {
+            map.scrollWheelZoom.enable();
+            enable = 'yes';
+        }
+        else if (enable === "yes")
+        {
+            map.scrollWheelZoom.disable();
+            enable = 'no';
+        }
+    });
 
 
 
