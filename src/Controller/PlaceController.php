@@ -55,13 +55,15 @@ class PlaceController extends AbstractController
 
         // =========================== LISTE COMMENTAIRES ==================================
         $comments = $place->getCommentsPlace();
+        $events = $place->getEvents();
 
         return $this->render(
             'place/index.html.twig',
             [
                 'place' => $place,
                 'form'  => $form->createView(),
-                'comments' => $comments
+                'comments' => $comments,
+                'events'   => $events
             ]
         );
 

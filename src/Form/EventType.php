@@ -66,13 +66,13 @@ class EventType extends AbstractType
                     'label' => "Style(s) de musique *"
                 ]
             )
-//            ->add('image',
-//                FileType::class,
-//                [
-//                    'label' => "Photo de l'événement",
-//                    'required' => false
-//                ]
-//            )
+            ->add('image',
+                FileType::class,
+                [
+                    'label' => "Photo de l'événement",
+                    'required' => false
+                ]
+            )
             ->add('urlEvent',
                 UrlType::class,
                 [
