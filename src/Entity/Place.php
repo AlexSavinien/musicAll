@@ -112,11 +112,34 @@ class Place
      */
     private $commentsPlace;
 
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $description;
+
     public function __construct()
     {
         $this->events = new ArrayCollection();
-        $this->prout = new ArrayCollection();
     }
+
+    /**
+     * @return mixed
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param mixed $description
+     * @return Place
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+        return $this;
+    }
+
 
     public function getId(): ?int
     {
