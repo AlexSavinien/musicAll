@@ -30,6 +30,15 @@ body {
     color: #710914!important;
 }
 
+/* liens footer */
+#navbar3 a{
+    color: #CD3C30!important;
+}
+
+#navbar3 a:hover{
+    color: #710914!important;
+}
+
 /* taille des liens navbar users */
 ul.navbar-nav a {
     font-size: 16px;
@@ -47,6 +56,9 @@ li.nav-item {
      margin-left: 30px;
  }
 
+#navbar3 p{
+    margin-top: 1rem;
+}
 
 /* couleur bouton principal */
 .btn-primary {
@@ -74,16 +86,46 @@ li.nav-item {
 }
 
 
-/*@media (max-width: 768px){
-    .none{
+@media (max-width: 768px){
+    /* menu responsive navbar1 */
+    #navbar1 li span {
         display: none;
     }
+
+    #navbar1 .container.navbar-nav{
+        display: flex;
+        flex-direction: row;
+    }
+
+    #navbar1 ul.navbar-nav {
+        display: flex;
+        flex-direction: row;
+    }
+
+    /* menu responsive navbar2 */
+    #navbar2 li img {
+        margin-left: 15px;
+    }
+
+    a.nav-link{
+        margin-left: 15px;
+    }
+
 }
-*/
 
+.btn-secondary{
+    color: #fff;
+    background-color: #CD3C30;
+    border-color: #CD3C30;
+}
 
+.btn-secondary:hover{
+    color: #fff;
+    background-color: #710914;
+    border-color: #710914;
+}
 
-
-
-
+#button-addon2 img{
+    width:20px
+}
 
