@@ -1,40 +1,54 @@
+/* typo du site */
+
 body {
     font-family: 'Montserrat', sans-serif;
 }
 
+/* couleur bouton principal */
 .bg-secondary{
     background-color: #f4f4f4!important;
 }
 
+/* couleur navbar admin */
 #navbar1{
-    background-color: #6D605F!important;
+    background-color: #221C1B!important;
 }
 
+/* couleur lien admin navbar admin */
+#navbar1 a.navbar-brand{
+    color: #ffffff;
+}
+
+
+/* couleur des liens navbar user */
 #navbar2 a.nav-link{
     color: #CD3C30!important;
 }
 
+/* couleur des liens navbar user */
 #navbar2 a.nav-link:hover{
     color: #710914!important;
 }
 
+/* taille des liens navbar users */
 ul.navbar-nav a {
     font-size: 16px;
     font-weight: 500;
 }
 
-
-@media (min-width: 768px){
-    .navbar-expand-md .navbar-nav {
-        align-items: center;
-    }
+/* aligner les icones avec les onglets nav */
+li.nav-item {
+    display: flex;
+    align-items: center;
 }
 
+#navbar1 li img,
 #navbar2 li img {
-    margin-left: 30px;
-}
+     margin-left: 30px;
+ }
 
 
+/* couleur bouton principal */
 .btn-primary {
     color: #fff;
     background-color: #CD3C30;
@@ -47,8 +61,29 @@ ul.navbar-nav a {
     border-color: #710914;
 }
 
+
 .h1, h1 {
     font-size: 2rem;
     font-weight: 200;
     color: gray;
 }
+
+
+.navbar-dark .navbar-toggler-icon{
+    background-image: url("../images/picto_burger.svg");
+}
+
+
+/*@media (max-width: 768px){
+    .none{
+        display: none;
+    }
+}
+*/
+
+
+
+
+
+
+
