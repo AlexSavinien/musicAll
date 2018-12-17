@@ -25,7 +25,7 @@ class EventController extends AbstractController
      * @param Event $event
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function index(Event $event)
+    public function index(Request $request, Event $event)
     {
         $em = $this->getDoctrine()->getManager();
         // =============================== FORMULAIRE ======================================
