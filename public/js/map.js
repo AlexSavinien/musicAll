@@ -87,11 +87,14 @@ $(document).ready(function(){
 
 
     /*******************************************************************************************************************
-     * APPEL AJAX sur l'événement 'input' de l'input de recherche
+     * APPEL AJAX sur le submit de l'input de recherche
      */
-    $('#recherche').on('input', function(){
-        console.log("j'écris bien dans la recherche");
+    $('#searchForm').on('submit', function(){
+        event.preventDefault();
+        console.log('recherche soumise');
+
         let research = $(this).val();
+
         $.get(
             '/home/map-ajax?research='+research,
             function(retour){
@@ -118,8 +121,23 @@ $(document).ready(function(){
                 map.removeLayer(eventsBase);
                 map.addLayer(eventsResearch);
 
+                $('#searchContent').html('<div id="searchContent-scrollbar"></div>');
+                for (let i=0; i<5; i++)
+                {
+                        console.log(i)
+                        $('#searchContent-scrollbar').append(
+                            "<div>"+
+                                "<p>"+ retour[i].place +"</p>"+
+                                "<p>"+ retour[i].name +"</p>"+
+                                "<p>"+ retour[i].artist +"</p>"+
+                                "<p>"+ retour[i].style +"</p>"+
+                                "<a href='/event/"+ retour[i].id + "'>Plus d'info</a>"+
+                            "</div><hr>"
+                        )
+                }
+                // $('.scrollbar-macosx').scrollbar();
             },
-            'json'                                      // format de la réponse ajax
+            'json'
         );
         // ======================== FIN APPEL AJAX ========================
     });
@@ -136,6 +154,12 @@ $(document).ready(function(){
     // }
     //
     // map.on('click', onMapClick);
+
+
+    /*******************************************************************************************************************
+     * Affichage des 5 premiers résultats de la recherche à la place de la présentation du site
+     *
+     */
 
 
 });

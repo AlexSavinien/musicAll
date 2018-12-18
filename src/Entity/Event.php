@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EventRepository")
@@ -20,51 +21,68 @@ class Event
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(max="40", maxMessage="Le pseudo ne peut pas excéder {{limit}} caractère")
+     * @Assert\NotBlank(message="Ce champs est obligatoire")
      */
     private $name;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\NotBlank(message="Ce champs est obligatoire")
      */
     private $eventDate;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="Ce champs est obligatoire")
+     * @Assert\Length(max="600", maxMessage="La description ne peut pas excéder {{limit}} caractères")
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Ce champs est obligatoire")
+     * @Assert\Length(max="255", maxMessage="Le champ artiste ne peut pas dépasser {{limit}} caractères")
      */
     private $artist;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Ce champs est obligatoire")
+     * @Assert\Length(max="255", maxMessage="Le champ style ne peut pas dépasser {{limit}} caractères")
      */
     private $style;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Image(
+     *     maxSize="1M",
+     *     maxSizeMessage="L'image ne peut pas dépasser {{ limit }}",
+     *     mimeTypesMessage="Le fichier doit être un format image")
      */
     private $image;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Url(message="Ce champs ne peut contenir une URL valide")
      */
     private $urlEvent;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Url(message="Ce champs ne peut contenir une URL valide")
      */
     private $urlTicketing;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max="100", maxMessage="Le champ prix ne peut excéder 100 caractères")
      */
     private $price;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Place", inversedBy="events")
+     * @Assert\NotBlank(message="Ce champs est obligatoire")
      * @ORM\JoinColumn(nullable=false)
      */
     private $place;
@@ -72,13 +90,13 @@ class Event
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\CommentEvent", mappedBy="event", orphanRemoval=true)
+     * @ORM\OrderBy({"publicationDate" = "DESC"})
      */
     private $commentsEvent;
 
 
     public function __construct()
     {
-        $this->commentEvents = new ArrayCollection();
         $this->commentsEvent = new ArrayCollection();
     }
 

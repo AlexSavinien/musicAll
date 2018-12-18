@@ -109,6 +109,7 @@ class Place
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\CommentPlace", mappedBy="place", orphanRemoval=true)
+     * @ORM\OrderBy({"publicationDate" = "DESC"})
      */
     private $commentsPlace;
 

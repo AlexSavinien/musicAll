@@ -39,6 +39,32 @@ $(document).ready(function(){
     L.control.zoom(false);
     // map.zoomControl=false
 
+    /*******************************************************************************************************************
+     * ZOOM min pour ne pas trop dézoomer
+     *
+     * @type {number}
+     * @private
+     */
+    map._layersMinZoom=5;
+    map.scrollWheelZoom.disable();
+    let enable = 'no';
+    $('#addMapId').click(function () {
+        if (enable === "no")
+        {
+            map.scrollWheelZoom.enable();
+            enable = 'yes';
+        }
+        else if (enable === "yes")
+        {
+            map.scrollWheelZoom.disable();
+            enable = 'no';
+        }
+    });
+
+
+    /*******************************************************************************************************************
+     * Marker lié à l'id fourni pour arriver sur la page.
+     */
     var layer1 = L.layerGroup([]);
     let marker = L.marker([$('#addMapId').data('lat'), $('#addMapId').data('lon')]);
 
