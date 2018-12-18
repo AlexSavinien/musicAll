@@ -129,9 +129,9 @@
                     {#</div>#}
                 {#</div>#}
 
-                <div id="rechercheForm">
+                <div>
                     <div class="form-group mb-3">
-                        <form method="post">
+                        <form method="post" id="searchForm">
                             <div class="input-group">
                                 <input type="search" class="form-control" id="recherche" name="recherche" placeholder="Concert, spectacle de rue..." aria-label="Recipient's username" aria-describedby="button-addon2">
                                 <div class="input-group-append">
@@ -141,12 +141,14 @@
                                 </div>
                             </div>
                         </form>
-                        <div class="mt-3 px-4">
-                            <h1>Cherchez, on trouve… </h1>
-                        </div>
-                        <div class="px-4">
-                            <p>MusicAll est le portail de la musique, de ses acteurs et de ses amoureux. Envie d'écouter un soliste, d'assister à un concert rock, ou jazz, de danser sur de la salsa ? Cherchez, on trouve…
-                                <br>Et si vous êtes musicien ou organisateur de concerts, inscrivez-vous sur MusicAll et partagez. Ça prend cinq minutes. </p>
+                        <div id="searchContent" class="searchContent-scrollbar">
+                            <div class="mt-3 px-4">
+                                <h1>Cherchez, on trouve… </h1>
+                            </div>
+                            <div class="px-4">
+                                <p>MusicAll est le portail de la musique, de ses acteurs et de ses amoureux. Envie d'écouter un soliste, d'assister à un concert rock, ou jazz, de danser sur de la salsa ? Cherchez, on trouve…
+                                    <br>Et si vous êtes musicien ou organisateur de concerts, inscrivez-vous sur MusicAll et partagez. Ça prend cinq minutes. </p>
+                            </div>
                         </div>
                     </div>
                 </div>

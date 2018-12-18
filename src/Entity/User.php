@@ -83,11 +83,16 @@ class User implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Image(
+     *     maxSize="1M",
+     *     maxSizeMessage="L'image ne peut pas dépasser {{ limit }}",
+     *     mimeTypesMessage="Le fichier doit être un format image")
      */
     private $image;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max="255", maxMessage="Le ou les styles ne peuvent pas faire plus de {{ limit }} caractères")
      */
     private $styles;
 
