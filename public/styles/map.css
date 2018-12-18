@@ -10,13 +10,13 @@
 }
 
 #searchContent-scrollbar {
-    height: 684px;
+    max-height: 684px;
     width: 100%;
     overflow: auto;
 }
 
 #rechercheContainer {
-    height: 684px;
+    max-height: 684px;
     width: 100%;
 }
 
