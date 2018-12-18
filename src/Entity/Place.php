@@ -82,6 +82,7 @@ class Place
     /**
      * @ORM\Column(type="float")
      * @Assert\NotBlank(message="Champ obligatoire")
+     * @Assert\Regex("^[+-]?([0-9]*[.])?[0-9]+$")
      *
      */
     private $lon;
@@ -89,6 +90,8 @@ class Place
     /**
      * @ORM\Column(type="float")
      * @Assert\NotBlank(message="Champ obligatoire")
+     * @Assert\Regex("^[+-]?([0-9]*[.])?[0-9]+$")
+     *
      */
     private $lat;
 

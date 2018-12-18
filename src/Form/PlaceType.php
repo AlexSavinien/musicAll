@@ -79,13 +79,13 @@ class PlaceType extends AbstractType
                 ]
             )
             ->add('lon',
-                NumberType::class,
+                TextType::class,
                 [
                     'label' => 'longitude'
                 ]
                 )
             ->add('lat',
-                NumberType::class,
+                TextType::class,
                 [
                     'label' => 'latitude'
                 ]

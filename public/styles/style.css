@@ -1,63 +1,42 @@
+/***********************************/
+/*                                 */
+/*          STYLE GENERAL          */
+/*                                 */
+/***********************************/
+
 /* typo du site */
+
 
 body {
     font-family: 'Montserrat', sans-serif;
 }
 
+.h1, h1 {
+    font-size: 2rem;
+    font-weight: 200;
+    color: gray;
+}
+
+.h2, h2 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: gray;
+}
+
+
+
+
+
+/****************************/
+/*                          */
+/*          BOUTON          */
+/*                          */
+/****************************/
+
+
 /* couleur bouton principal */
 .bg-secondary{
     background-color: #f4f4f4!important;
-}
-
-/* couleur navbar admin */
-#navbar1{
-    background-color: #221C1B!important;
-}
-
-/* couleur lien admin navbar admin */
-#navbar1 a.navbar-brand{
-    color: #ffffff;
-}
-
-
-/* couleur des liens navbar user */
-#navbar2 a.nav-link{
-    color: #CD3C30!important;
-}
-
-/* couleur des liens navbar user */
-#navbar2 a.nav-link:hover{
-    color: #710914!important;
-}
-
-/* liens footer */
-#navbar3 a{
-    color: #CD3C30!important;
-}
-
-#navbar3 a:hover{
-    color: #710914!important;
-}
-
-/* taille des liens navbar users */
-ul.navbar-nav a {
-    font-size: 16px;
-    font-weight: 500;
-}
-
-/* aligner les icones avec les onglets nav */
-li.nav-item {
-    display: flex;
-    align-items: center;
-}
-
-#navbar1 li img,
-#navbar2 li img {
-     margin-left: 30px;
- }
-
-#navbar3 p{
-    margin-top: 1rem;
 }
 
 /* couleur bouton principal */
@@ -103,30 +82,107 @@ li.nav-item {
     margin-right: 5px;
 }
 
-.h1, h1 {
-    font-size: 2rem;
-    font-weight: 200;
-    color: gray;
+.btn-secondary{
+    color: #fff;
+    background-color: #CD3C30;
+    border-color: #CD3C30;
 }
 
-.h2, h2 {
-    font-size: 1.5rem;
-    font-weight: 400;
-    color: gray;
+.btn-secondary:hover{
+    color: #fff;
+    background-color: #710914;
+    border-color: #710914;
+}
+
+#button-addon2 img{
+    width:20px
+}
+
+/* Enlever le focus sur le bouton verifier la position */
+button:focus {
+    outline: 0px auto -webkit-focus-ring-color;
+}
+
+.btn-outline-danger.focus, .btn-outline-danger:focus {
+    box-shadow: none!important;
 }
 
 
+/****************************/
+/*                          */
+/*          NAVBAR          */
+/*                          */
+/****************************/
 
-/* taille des containers differents */
 
+/* ADMIN */
+/* couleur navbar admin */
 
+#navbar1{
+    background-color: #221C1B!important;
+}
 
+/* couleur lien admin navbar admin */
+#navbar1 a.navbar-brand{
+    color: #ffffff;
+}
+
+/* USER */
+/* couleur des liens navbar user */
+#navbar2 a.nav-link{
+    color: #CD3C30!important;
+}
+
+/* couleur des liens navbar user */
+#navbar2 a.nav-link:hover{
+    color: #710914!important;
+}
+
+/* liens footer */
+#navbar3 a{
+    color: #CD3C30!important;
+}
+
+#navbar3 a:hover{
+    color: #710914!important;
+}
+
+/* taille des liens navbar users */
+ul.navbar-nav a {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* aligner les icones avec les onglets nav */
+li.nav-item {
+    display: flex;
+    align-items: center;
+}
+
+#navbar1 li img,
+#navbar2 li img {
+    margin-left: 30px;
+}
+
+#navbar3 p{
+    margin-top: 1rem;
+}
 
 .navbar-dark .navbar-toggler-icon{
     background-image: url("../images/picto_burger.svg");
 }
 
 
+
+
+/**********************************/
+/*                                */
+/*          MEDIA QUEIES          */
+/*                                */
+/**********************************/
+
+
+/* NAVBAR */
 @media (max-width: 768px){
     /* menu responsive navbar1 */
     #navbar1 li span {
@@ -154,30 +210,12 @@ li.nav-item {
 
 }
 
-.btn-secondary{
-    color: #fff;
-    background-color: #CD3C30;
-    border-color: #CD3C30;
-}
 
-.btn-secondary:hover{
-    color: #fff;
-    background-color: #710914;
-    border-color: #710914;
-}
-
-#button-addon2 img{
-    width:20px
-}
-
-
-
+/* BOUTON avec icones */
 @media (max-width: 768px) {
-    /*.container #mediaContainer {*/
-        /*width: 540px!important;*/
-    /*}*/
 
     #mediaContainer a span{
         display: none;
     }
 }
+

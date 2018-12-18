@@ -74,4 +74,20 @@ $(document).ready(function(){
     })
 
 
+    map.scrollWheelZoom.disable();
+    let enable = 'no';
+    $('#addMapId').click(function () {
+        if (enable === "no")
+        {
+            map.scrollWheelZoom.enable();
+            enable = 'yes';
+        }
+        else if (enable === "yes")
+        {
+            map.scrollWheelZoom.disable();
+            enable = 'no';
+        }
+    });
+
+
 });

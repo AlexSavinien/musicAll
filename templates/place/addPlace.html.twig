@@ -14,7 +14,7 @@
 
     <h1 class="mt-5">Ajouter un lieu</h1>
 
-    <div class="mt-3">
+    <div class="mt-3 mb-3">
         {{ form_start(form) }}
             {{ form_row(form.name) }}
             {% if place.id is null %}
@@ -65,7 +65,7 @@
         <div>
             <p>En cas de soucis de localisation, rentrez vous même votre latitude et longitude via Google map en <a href="https://www.coordonnees-gps.fr/" target="_blank">cliquant ici</a> !</p>
 
-            <button id="mapButton" class="btn btn-info">
+            <button id="mapButton" class="btn-lg btn-block btn-outline-danger">
                 Vérifier la position
             </button>
             <div>
