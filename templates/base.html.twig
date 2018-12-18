@@ -9,7 +9,7 @@
             <link rel="stylesheet" href="{{ asset('styles/style.css') }}">
         {% endblock %}
     </head>
-
+    <body>
     {% if is_granted('ROLE_ADMIN') %}
 
         <nav id="navbar1" class="navbar navbar-expand-md navbar-dark bg-dark">
@@ -112,7 +112,7 @@
                     </div>
                 </div>
     </nav>
-    <div class="container-fluid">
+    <div class="container">
 
         {# affichage des messages flash #}
         {% for type, flashes in app.session.flashBag.all %}
@@ -129,7 +129,7 @@
             {% endfor %}
 
         {% endfor %}
-        <div class="row">
+        <div>
             {% block body %}
             {% endblock %}
         </div>
