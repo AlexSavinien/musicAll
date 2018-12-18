@@ -9,13 +9,13 @@
             <link rel="stylesheet" href="{{ asset('styles/style.css') }}">
         {% endblock %}
     </head>
-
+    <body>
     {% if is_granted('ROLE_ADMIN') %}
 
         <nav id="navbar1" class="navbar navbar-expand-md navbar-dark bg-dark">
             <div class="container navbar-nav">
                 <div class="navbar-brand">
-                    <img src="{{ asset('images/picto_config.svg') }}" alt="logo musicall" style="height: 25px; margin-right: 5px;">
+                    <img src="{{ asset('images/picto_config.svg') }}" alt="logo musicall" style="height: 25px;">
                     <a class="navbar-brand">
                         Admin
                     </a>
@@ -24,21 +24,21 @@
                     <div class="navbar-collapse">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <img src="{{ asset('images/picto_user_admin.svg') }}" alt="logo musicall" style="height: 25px;">
                                 <a class="nav-link" href="{{ path('app_admin_user_index') }}">
-                                    Gestion des utilisateurs
+                                    <img src="{{ asset('images/picto_user_admin.svg') }}" alt="logo musicall" style="height: 25px;">
+                                    <span>Gestion des utilisateurs</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <img src="{{ asset('images/picto_map_admin.svg') }}" alt="logo musicall" style="height: 25px;">
                                 <a class="nav-link" href="{{ path('app_admin_place_index') }}">
-                                    Gestion des lieux
+                                    <img src="{{ asset('images/picto_map_admin.svg') }}" alt="logo musicall" style="height: 25px;">
+                                    <span>Gestion des lieux</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <img src="{{ asset('images/picto_date_admin.svg') }}" alt="logo musicall" style="height: 25px;">
                                 <a class="nav-link" href="{{ path('app_admin_event_index') }}">
-                                    Gestion des évenements
+                                    <img src="{{ asset('images/picto_date_admin.svg') }}" alt="logo musicall" style="height: 25px;">
+                                    <span>Gestion des évenements</span>
                                 </a>
                             </li>
                         </ul>
@@ -51,14 +51,14 @@
 
     <nav id="navbar2" class="navbar navbar-expand-md navbar-dark bg-secondary">
         <div class="container">
-        <a class="navbar-brand" href="#"><img src="{{ asset('images/logo_musicall.svg') }}" alt="logo musicall" style="height: 50px;"></a>
+        <a class="navbar-brand" href="{{ path('app_map_index') }}"><img src="{{ asset('images/logo_musicall.svg') }}" alt="logo musicall" style="height: 50px;"></a>
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon">
                     </span>
                 </button>
 
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <div class="offset-xl-1 collapse navbar-collapse" id="navbarSupportedContent">
                             <div class="container navbar-nav">
                                 <div class="navbar-brand">
                                     <ul class="navbar-nav">
@@ -80,7 +80,7 @@
                                             </li>
                                         {% else %}
                                             <li class="nav-item">
-                                                <img src="{{ asset('images/picto_user.svg') }}" alt="logo musicall" style="height: 25px;"><
+                                                <img src="{{ asset('images/picto_user.svg') }}" alt="logo musicall" style="height: 25px;">
                                                 <a class="nav-link" href="{{ path('app_security_register', {id: app.user.id} ) }}">
                                                     {{ app.user.pseudo }}
                                                 </a>
@@ -129,16 +129,17 @@
             {% endfor %}
 
         {% endfor %}
-
-        {% block body %}
-            {% block jsMap %}{% endblock %}
-            {% block map %}{% endblock %}
-        {% endblock %}
+        <div>
+            {% block body %}
+            {% endblock %}
+        </div>
     </div>
     {% block footer %}
         <nav id="navbar3" class="navbar navbar-expand-md navbar-dark bg-secondary">
             <div class="container navbar-nav">
-                <p> © MusicAll - 2018 -  Tous droits réservés | <a href="">mentions légales</a> </p>
+                <div class="row mx-auto">
+                    <p> © MusicAll - 2018 -  Tous droits réservés | <a href="">mentions légales</a> </p>
+                </div>
             </div>
         </nav>
     {% endblock %}
