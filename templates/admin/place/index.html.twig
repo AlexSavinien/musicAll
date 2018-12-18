@@ -1,30 +1,33 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
-    <h1>Gestion des lieux</h1>
-    <table class="table table-striped">
-        <tr>
-            <th>Nom du lieu</th>
-            <th>Propiétaire du lieu</th>
-            <th width="250px"></th>
-        </tr>
-        {% for place in places %}
+    <div id="mediaContainer">
+        <h1 class="mt-5">Gestion des lieux</h1>
+        <table class="table table-striped mt-3">
             <tr>
-                <td>{{ place.name}}</td>
-                <td>{{ place.owner }}</td>
-                <td>
-                    <a href="{{ path('app_place_addplace', {id: place.id}) }}"
-                       class="btn btn-primary">
-                        Modifier le lieu
-                    </a>
-                    <a href="{{ path('app_admin_place_delete', {id: place.id}) }}"
-                       class="btn btn-danger">
-                        X
-                    </a>
-                </td>
+                <th>Nom du lieu</th>
+                <th>Propiétaire du lieu</th>
+                <th width="350px"></th>
             </tr>
-        {% endfor %}
-    </table>
+            {% for place in places %}
+                <tr>
+                    <td>{{ place.name}}</td>
+                    <td>{{ place.owner }}</td>
+                    <td>
+                        <a href="{{ path('app_place_addplace', {id: place.id}) }}"
+                           class="btn btn-outline-primary" id="boutonImage1">
+                            <img src="{{ asset('images/picto_modif.svg') }}" alt="">
+                            <span>Modifier</span>
+                        </a>
+                        <a href="{{ path('app_admin_place_delete', {id: place.id}) }}"
+                           class="btn btn-outline-danger" id="boutonImage2">
+                            <img src="{{ asset('images/picto_trash.svg') }}" alt="">
+                            <span>supprimer</span>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
 
 {% endblock %}

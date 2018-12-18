@@ -10,52 +10,46 @@
 {% block body %}
     {# TODO faire l'iframe de la carte avec pictos #}
 
-    <div class="container">
-        <div class="row mt-5">
-            <h1>{{ place.name }}</h1>
-        </div>
+    <div class="container mt-5">
         <div class="row">
             <div class="col-md-6">
-                <div>
-                    <p>Adresse : <span style="color: #CD3C30;">{{ place.address }} - {{ place.zipCode }} - {{ place.town }}</span></p>
+                <div >
+                    <h1>{{ place.name }}</h1>
                 </div>
                 <div>
-                    <p>Téléphone : <span style="color: #CD3C30;">{{ place.phone }}</span></p>
+                    <p><span style="color: #CD3C30;">{{ place.address }} - {{ place.zipCode }} - {{ place.town }}</span></p>
                 </div>
                 <div>
-                    <p>Email de l'établissement : <span style="color: #CD3C30;">{{ place.email }}</span></p>
+                    <p><span style="color: #CD3C30;">{{ place.phone }}</span></p>
                 </div>
                 <div>
-                    <p>Description : </p>
+                    <p><span style="color: #CD3C30;">{{ place.email }}</span></p>
+                </div>
+                <div>
                     <p>{{ place.description|nl2br }}</p>
                 </div>
             </div>
             <div class="col-md-6">
-                <div data-lat="{{ place.lat }}" data-lon="{{ place.lon }}" id="addMapId" style="background-color: #d0d0d0; width: 100%; height: 100%;"></div>
+                <div data-lat="{{ place.lat }}" style="min-height: 400px;" data-lon="{{ place.lon }}" id="addMapId" style="background-color: #d0d0d0; width: 100%; height: 100%;"></div>
             </div>
         </div>
         <div class="row mt-5">
-            <div class="col-md-3">
-                <div style="background-color: #d0d0d0; width: 100%; height: 150px;"></div>
-            </div>
-            <div class="col-md-3">
-                <div style="background-color: #d0d0d0; width: 100%; height: 150px;"></div>
-            </div>
-            <div class="col-md-3">
-                <div style="background-color: #d0d0d0; width: 100%; height: 150px;"></div>
-            </div>
-            <div class="col-md-3">
-                <div style="background-color: #d0d0d0; width: 100%; height: 150px;"></div>
+            <div class="col-md-12">
+                <div style="background-color: #d0d0d0; width: 100%; min-height: 450px;">
+                    <img src="{{ asset('images/carroussel.svg') }}" alt="carroussel">
+                </div>
             </div>
         </div>
-    {{ form_start(form) }}
-    {{ form_row(form.content) }}
-    <div class="text-right">
-        <button type="submit" class="btn btn-primary">
-            Enregistrer
-        </button>
-    </div>
-    {{ form_end(form) }}
+        <div class="mt-3">
+            {{ form_start(form) }}
+            {{ form_row(form.content) }}
+            <div class="text-right">
+                <button type="submit" class="btn btn-primary">
+                    Enregistrer
+                </button>
+            </div>
+            {{ form_end(form) }}
+        </div>
 
     <div>
         {% for comment in comments %}

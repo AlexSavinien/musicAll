@@ -1,33 +1,38 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
-    <h1>Gestion des utilisateurs</h1>
-    <table class="table table-striped">
-        <tr>
-            <th>Id</th>
-            <th>Nom</th>
-            <th>Prénom</th>
-            <th>Rôle</th>
-            <th width="250px"></th>
-        </tr>
-        {% for user in users %}
-            <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.lastname }}</td>
-                <td>{{ user.firstname }}</td>
-                <td>{{ user.role }}</td>
-                <td>
-                    <a href="{{ path('app_admin_user_statut', {id: user.id}) }}"
-                       class="btn btn-primary">
-                        Changer le role
-                    </a>
-                    <a href="{{ path('app_admin_user_delete', {id: user.id}) }}"
-                       class="btn btn-danger">
-                        X
-                    </a>
-                </td>
+    <div id="mediaContainer">
+        <h1 class="mt-5">Gestion des utilisateurs</h1>
+        <table class="table table-striped mt-3 col-12">
+            <tr class="col-12">
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Rôle</th>
+                <th width="400px"></th>
             </tr>
-        {% endfor %}
-    </table>
+            {% for user in users %}
+                <tr class="col-12">
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.lastname }}</td>
+                    <td>{{ user.firstname }}</td>
+                    <td>{{ user.role }}</td>
+                    <td>
+                        <a href="{{ path('app_admin_user_statut', {id: user.id}) }}"
+                           class="btn btn-outline-primary" id="boutonImage1">
+                            <img src="{{ asset('images/picto_admin.svg') }}" alt="">
+                            <span>Modifier le role</span>
+                        </a>
+                        <a href="{{ path('app_admin_user_delete', {id: user.id}) }}"
+                           class="btn btn-outline-danger" id="boutonImage2">
+                            <img src="{{ asset('images/picto_trash.svg') }}" alt="">
+                            <span>supprimer</span>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
 {% endblock %}
+
+

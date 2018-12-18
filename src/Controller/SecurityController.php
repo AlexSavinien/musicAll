@@ -134,7 +134,7 @@ class SecurityController extends AbstractController
 
         if(!is_null($this->getUser()))
         {
-            $this->redirectToRoute('app_map_index');
+            return $this->redirectToRoute('app_map_index');
         }
 
         return $this->render(

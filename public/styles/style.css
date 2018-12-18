@@ -73,12 +73,53 @@ li.nav-item {
     border-color: #710914;
 }
 
+/* couleur bouton outline */
+#boutonImage1.btn-outline-primary{
+    color: #6D605F;
+    border-color: #6D605F;
+}
+
+#boutonImage1.btn-outline-primary:hover {
+    color: #221C1B;
+    background-color: rgba(109,96,95,.5);
+    border-color: #221C1B;
+}
+
+#boutonImage2.btn-outline-danger{
+    color: #6D605F;
+    border-color: #CD3C30;
+}
+
+#boutonImage2.btn-outline-danger:hover {
+    color: #CD3C30;
+    background-color: rgba(205,60,48,.5);
+    border-color: #CD3C30;
+}
+
+/* bouton avec image */
+
+#boutonImage1 img, #boutonImage2 img{
+    width: 25px;
+    margin-right: 5px;
+}
 
 .h1, h1 {
     font-size: 2rem;
     font-weight: 200;
     color: gray;
 }
+
+.h2, h2 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: gray;
+}
+
+
+
+/* taille des containers differents */
+
+
 
 
 .navbar-dark .navbar-toggler-icon{
@@ -129,3 +170,14 @@ li.nav-item {
     width:20px
 }
 
+
+
+@media (max-width: 768px) {
+    /*.container #mediaContainer {*/
+        /*width: 540px!important;*/
+    /*}*/
+
+    #mediaContainer a span{
+        display: none;
+    }
+}
