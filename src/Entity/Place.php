@@ -22,14 +22,14 @@ class Place
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Champ obligatoire")
-     * @Assert\Length(max="150", maxMessage="Votre nom ne peut pas dépasser {{limit}} caractères")
+     * @Assert\Length(max="150", maxMessage="Votre nom ne peut pas dépasser {{ limit }} caractères")
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
      * @Assert\NotBlank(message="Ce champs est obligatoire")
-     * @Assert\Length(max="250", maxMessage="Votre email ne peut pas dépasser {{limit}} caractères")
+     * @Assert\Length(max="250", maxMessage="Votre email ne peut pas dépasser {{ limit }} caractères")
      */
     private $email;
 
@@ -50,7 +50,7 @@ class Place
     /**
      * @ORM\Column(type="integer", length=5)
      * @Assert\NotBlank(message="Champ obligatoire")
-     * @Assert\Length(max="5", maxMessage="Le numéro de la rue ne peut pas dépasser {{limit}} caractères")
+     * @Assert\Length(max="5", maxMessage="Le numéro de la rue ne peut pas dépasser {{ limit }} caractères")
      */
     private $streetNumber;
 
@@ -68,8 +68,8 @@ class Place
      * @Assert\Length(
      *     max="5",
      *     min="5",
-     *     maxMessage="Le code postal ne doit pas dépasser {{limit}} caractère",
-     *     minMessage="Le code postal ne doit pas faire moins de {{limit}} caractère")
+     *     maxMessage="Le code postal ne doit pas dépasser {{ limit }} caractère",
+     *     minMessage="Le code postal ne doit pas faire moins de {{ limit }} caractère")
      */
     private $zipCode;
 
@@ -82,7 +82,7 @@ class Place
     /**
      * @ORM\Column(type="float")
      * @Assert\NotBlank(message="Champ obligatoire")
-     * @Assert\Regex("^[+-]?([0-9]*[.])?[0-9]+$")
+     * @Assert\Regex("^[+-]?([0-9]*[.])?[0-9]+$^")
      *
      */
     private $lon;
@@ -90,7 +90,7 @@ class Place
     /**
      * @ORM\Column(type="float")
      * @Assert\NotBlank(message="Champ obligatoire")
-     * @Assert\Regex("^[+-]?([0-9]*[.])?[0-9]+$")
+     * @Assert\Regex("^[+-]?([0-9]*[.])?[0-9]+$^")
      *
      */
     private $lat;

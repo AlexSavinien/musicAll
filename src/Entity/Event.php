@@ -21,7 +21,7 @@ class Event
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Length(max="40", maxMessage="Le pseudo ne peut pas excéder {{limit}} caractère")
+     * @Assert\Length(max="40", maxMessage="Le pseudo ne peut pas excéder {{ limit }} caractère")
      * @Assert\NotBlank(message="Ce champs est obligatoire")
      */
     private $name;
@@ -35,21 +35,21 @@ class Event
     /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank(message="Ce champs est obligatoire")
-     * @Assert\Length(max="600", maxMessage="La description ne peut pas excéder {{limit}} caractères")
+     * @Assert\Length(max="600", maxMessage="La description ne peut pas excéder {{ limit }} caractères")
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Ce champs est obligatoire")
-     * @Assert\Length(max="255", maxMessage="Le champ artiste ne peut pas dépasser {{limit}} caractères")
+     * @Assert\Length(max="255", maxMessage="Le champ artiste ne peut pas dépasser {{ limit }} caractères")
      */
     private $artist;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Ce champs est obligatoire")
-     * @Assert\Length(max="255", maxMessage="Le champ style ne peut pas dépasser {{limit}} caractères")
+     * @Assert\Length(max="255", maxMessage="Le champ style ne peut pas dépasser {{ limit }} caractères")
      */
     private $style;
 
