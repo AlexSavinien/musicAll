@@ -110,7 +110,7 @@ class EventController extends AbstractController
                 $image = $event->getImage();
 
                 if (!is_null($image)) {
-                    dump($image);
+//                    dump($image);
                     // TODO : S'occuper la prise en charge image
                     $filename = uniqid() . '.' . $image->guessExtension();
 

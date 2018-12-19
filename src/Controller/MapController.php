@@ -68,7 +68,7 @@ class MapController extends AbstractController
 
             foreach ($events as $event) {
                 $place = $event->getPlace();
-                dump($event);
+//                dump($event);
                 $tab[$i]['lat'] = $place->getLat();
                 $tab[$i]['lon'] = $place->getLon();
                 $tab[$i]['place'] = $place->getName();

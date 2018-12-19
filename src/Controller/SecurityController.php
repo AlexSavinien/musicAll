@@ -60,7 +60,7 @@ class SecurityController extends AbstractController
 
                     $image = $user->getImage();
                     if (!is_null($image)) {
-                        dump($image);
+//                        dump($image);
                         // TODO : S'occuper la prise en charge image
                         $filename = uniqid() . '.' . $image->guessExtension();
 
@@ -126,7 +126,7 @@ class SecurityController extends AbstractController
         $error  = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        dump($error);
+//        dump($error);
 
         if ( !empty($error) ){
             $this->addFlash("error", 'Identifiant incorrecte');

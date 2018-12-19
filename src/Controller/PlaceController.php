@@ -78,7 +78,7 @@ class PlaceController extends AbstractController
      */
     public function addPlace(Request $request, $id)
     {
-        dump($_SERVER);
+//        dump($_SERVER);
         $em = $this->getDoctrine()->getManager();
         // DEBUT - Syntaxe pour l'image dans le formulaire
         // TODO : faire les images avec julien
